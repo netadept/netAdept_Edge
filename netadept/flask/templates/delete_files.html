@@ -1,0 +1,20 @@
+{% extends "secondbase.html" %}
+{% block content %}
+<br><br><br>
+   <h2 style="color:burlywood">Select File to Delete: </h2><br><br>
+      <form method="POST" enctype="multipart/form-data">
+        <label for="groups">Select File:</label>
+        <select id="file" name="file"> 
+          {% for tree in files %}
+          <option>
+          {{tree}}
+          </option> 
+          {% endfor %}
+        </select>
+        <input type="submit" value="Delete" class="button">
+    </form>
+    {% if file %}
+    {{file}}
+    {% endif %}
+
+{% endblock content %}  

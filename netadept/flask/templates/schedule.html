@@ -1,0 +1,64 @@
+{% extends "secondbase.html" %}
+{% block content %}
+<br><br><br><br><br>
+
+<form method="POST">
+    <label for="schedule" style="color:rgb(222, 184, 135);  font-size: 30px;">Schedule Backups:</label><br><br>
+    <select id="min" name="min" > 
+      <option value="*" >Minutes</option>
+      {% for i in range(0, 60) %}
+      <option>
+      {{i}}
+      </option> 
+      {% endfor %}
+    </select>
+    <select id="hrs" name="hrs"> 
+      <option value="*" >Hours</option>
+      {% for i in range(0, 24) %}
+      <option>
+      {{i}}
+      </option> 
+      {% endfor %}
+    </select>
+    
+    <select id="day" name="day"> 
+      <option value="*" >Day</option>
+      {% for i in range(0, 32) %}
+      <option>
+      {{i}}
+      </option> 
+      {% endfor %}
+    </select>
+    <select id="mth" name="mth"> 
+      <option value="*" >Month</option>
+      {% for i in range(1, 13) %}
+      <option>
+      {{i}}
+      </option> 
+      {% endfor %}
+    </select>
+    <select id="dow" name="dow"> 
+      <option value="*" >Day of Week</option>
+      <option value="1">Monday</option> 
+      <option value="2">Tuesday</option> 
+      <option value="3">Wednesday</option> 
+      <option value="4">Thursday</option> 
+      <option value="5">Friday</option> 
+      <option value="6">Saturday</option> 
+      <option value="0">Sunday</option> 
+    </select>
+    <br><br><br>
+    <label for="info" style="color:rgb(222, 184, 135); font-size: 20px;">Backups will collect the following :</label><br><br>
+    <ul>Device Configuration</ul>
+    <ul>IP Interfaces</ul>
+    <ul>Routing</ul>
+    <ul>Logs</ul>
+
+    <br><br>
+    <input type="submit" value="Schedule Backups" class="button" style="width: 620px;"><br><br>
+</form>    
+    <a href="{{ url_for('clear')}}">
+    <input type="submit" value="Clear Schedule" class="button" style="width: 620px;"><br><br>
+    </a>
+
+{% endblock content %}  

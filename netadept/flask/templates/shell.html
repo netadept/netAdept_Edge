@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% extends "secondbase.html" %}
+{% block content %}
+<br><br>
+    <link rel="stylesheet" href="../../static/CSS/style.css">
+<div class="container">
+    {% if session['singleselect'] != 'NONE' %}
+    <h2 style="color:burlywood">DEVICE :    {{session["singleselect"]}}</h2>
+    {% else %}
+    <h2 style="color:burlywood"> GROUPS :    {{session["groupselectOne"]}}  &  {{session["groupselectTwo"]}} </h2>
+    {% endif %}
+    <br>
+        <form method="POST"  id="" name="command"> 
+        <label for="command">Command: </label>
+        <input type="text" id="command" name="command" placeholder=""><br>
+        <br>
+      <input type="submit" value="Send"><br>
+    </div>
+    </form>
+<div class="container">
+    <br>
+    <pre>{{content | safe}}</pre>
+</div>
+<br>
+{% endblock content %}  
+

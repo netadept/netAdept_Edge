@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>netAdept</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/CSS/navbar.css">
+   	<header class="header">
+    </header>
+</head>
+<body>
+<nav class="navbar">
+    <svg height="30" width="40" fill="none">
+        <image height="30" width="40" href="../../static/mushroom.svg" />
+    </svg>
+    <a href="{{ url_for('homepage') }}" class="logo">netAdept</a>
+    <span class="sesh">SERVER IP : {{session["svr_ip"]}}</span>
+    <span class="sesh">SELECTED DEVICE : {{session["singleselect"]}} </span>
+    <span class="sesh">SELECTED GROUPS : {{session["groupselectOne"]}}     {{session["groupselectTwo"]}} </span>
+    </a>
+    <div>
+        <ul>
+	        <a href="{{ url_for('logout') }}">Log Out</a>
+            <svg height="18" width="35" fill="none"><image height="18" width="35" href="../../static/logout.svg"/></svg>
+        </ul>
+    </div>
+</nav>

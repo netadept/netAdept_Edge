@@ -1,0 +1,29 @@
+{% extends "secondbase.html" %}
+{% block content %}
+<body>
+    <br><br><br>
+
+
+    <div class="container">
+        <h2 style="color:rgb(222, 184, 135)">Backup Schedule: </h2><br>
+        <table class="table">
+            <tr class="headings">
+                {% for head in headings %}
+                <th>{{head}}</th>
+                {% endfor %}
+            </tr>
+
+            {% for rows in data %}
+                <tr>
+                    {% for cell in rows %}
+                    <td>
+                        {{cell}}
+                    </td>
+                    {% endfor %}
+
+                </tr>
+            {% endfor %}
+        </table><br>
+    </div>
+
+{% endblock content %}  

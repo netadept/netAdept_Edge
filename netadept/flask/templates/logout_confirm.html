@@ -1,0 +1,17 @@
+{% extends "secondbase.html" %}
+{% block content %}
+<body>
+    <br><br><br>
+    <div class="container">
+        <h3 style="color:burlywood">Are you sure that you want to log out {{session["username"]}} ?</h3>
+        <br><br>
+            <form method="POST">
+                <a href="{{ url_for('logout') }}">
+                    <button class="button" type="submit">Log Out</button>
+                </a> 
+                <a href="{{ url_for('deviceselector') }}" class="button">Cancel</a>
+            </form><br>
+         
+    </div>
+</body>
+{% endblock content %}  
