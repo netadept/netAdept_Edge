@@ -1,0 +1,54 @@
+{% extends "secondbase.html" %}
+{% block content %}
+
+<br><br>  
+<h2 style="color:burlywood">Select Groups</h2><br>
+  <div class="container">
+      <form method="POST"  id="formOne" name="formOne"> 
+          <span class="filters"> GROUP FILTERS: </span>  
+              <select id="group1" name="groupselectOne"> 
+                {% for grp in grouplist %}
+                <option>
+                {{grp}}
+                </option> 
+                {% endfor %}
+              </select>
+              <select id="group2" name="groupselectTwo"> 
+                {% for grp in grouplist %}
+                <option>
+                {{grp}}
+                </option> 
+                {% endfor %}
+              </select>
+            <a><input type="submit" class="button" value="submit" action="#"/></a> 
+      </form> 
+  </div>
+<span>
+{% for data in device_list %}
+<pre>
+    <div class="container">
+      <h3 style="color:burlywood">DEVICE: {{data}}</h3>
+            {% if data.platform == 'ios' -%}
+            DEVICE TYPE: CISCO
+            {%- elif data.platform == 'junos' -%}
+            DEVICE TYPE: JUNIPER
+            {%- elif data.platform == 'huawei_vrp' -%}
+            DEVICE TYPE: HUAWEI
+            {%- elif data.platform == 'fortinet' -%}
+            DEVICE TYPE: FORTIGATE
+            {%- else -%}
+            DEVICE TYPE: UNKNOWN   
+            {% endif %}
+            IP ADDRESS: {{data.hostname}}
+            PLATFORM: {{data.platform}}
+            PORT: {{data.port}}
+            GROUPS: 
+            {% for grps in data.groups -%}
+            &nbsp;&nbsp;&nbsp;{{grps}}
+            {% endfor %}
+    </div>
+</pre>
+{% endfor %}
+</span>
+
+{% endblock content %}  

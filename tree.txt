@@ -1,0 +1,134 @@
+.
+├── backupscript.sh
+├── netadept
+│   ├── config.yaml
+│   ├── docker
+│   │   ├── mongo
+│   │   │   └── docker-compose.yml
+│   │   └── zabbix-docker
+│   ├── flask
+│	│	│
+│	│	├── app.py
+│	│	├── backups
+│	│	│   ├── CISCO_TEST_C3725
+│	│	│   ├── CISCO_TEST_ROUTER
+│	│	│   │   └── backup_CISCO_TEST_ROUTER_11-03-2026.txt
+│	│	│   ├── CISCO_TEST_VIOS
+│	│	│   ├── FORTIGATE_TEST_ROUTER
+│	│	│   ├── HUAWEI_TEST_ROUTER
+│	│	│   ├── HUAWEI_TEST_ROUTER999
+│	│	│   ├── SRX_TEST_ROUTER
+│	│	│   │   └── backup_SRX_TEST_ROUTER_11-03-2026.txt
+│	│	│   └── testmachine
+│	│	├── cli
+│	│	│   ├── cli_cmds.txt
+│	│	│   └── cli_out.txt
+│	│	├── files
+│	│	│   └── download.svg
+│	│	├── nornir.log
+│	│	├── output
+│	│	│   └── output.txt
+│	│	├── scripts
+│	│	│   ├── backup.py
+│	│	│   ├── cli_tool.py
+│	│	│   ├── filefromdevice.py
+│	│	│   ├── file_transfer.py
+│	│	│   ├── file_transfer_rx.py
+│	│	│   ├── int_show.py
+│	│	│   ├── reverse_dns.py
+│	│	│   ├── show.py
+│	│	│   ├── who.py
+│	│	│   └── zabbix.py
+│	│	├── static
+│	│	│   ├── cli.svg
+│	│	│   ├── clitool.svg
+│	│	│   ├── CSS
+│	│	│   │   └── style.css
+│	│	│   ├── delete.svg
+│	│	│   ├── download.svg
+│	│	│   ├── down.svg
+│	│	│   ├── drawio2.svg
+│	│	│   ├── drawio.svg
+│	│	│   ├── edit.svg
+│	│	│   ├── fortinet.svg
+│	│	│   ├── logo_gotty.svg
+│	│	│   ├── logo_netmiko.svg
+│	│	│   ├── logo_nornir.svg
+│	│	│   ├── logo_scrapli.svg
+│	│	│   ├── logout.svg
+│	│	│   ├── logo_zabbix.svg
+│	│	│   ├── m1.svg
+│	│	│   ├── mongo.svg
+│	│	│   ├── mushroom.svg
+│	│	│   ├── netadept_logo.svg
+│	│	│   ├── rcv.svg
+│	│	│   ├── send.svg
+│	│	│   ├── snmp.svg
+│	│	│   ├── start.svg
+│	│	│   ├── stop.svg
+│	│	│   ├── up.svg
+│	│	│   └── zabbix.svg
+│	│	├── templates
+│	│	│   ├── about.html
+│	│	│   ├── authed_users.html
+│	│	│   ├── backup.html
+│	│	│   ├── base.html
+│	│	│   ├── basetestpage.html
+│	│	│   ├── base_topbar.html
+│	│	│   ├── cli.html
+│	│	│   ├── cli_tool.html
+│	│	│   ├── config.html
+│	│	│   ├── config_part.html
+│	│	│   ├── config_runint.html
+│	│	│   ├── dashboard.html
+│	│	│   ├── dash.html
+│	│	│   ├── del_auth.html
+│	│	│   ├── delete_files.html
+│	│	│   ├── delete_files_select.html
+│	│	│   ├── del_select.html
+│	│	│   ├── deviceselector.html
+│	│	│   ├── edit_groups_file.html
+│	│	│   ├── error.html
+│	│	│   ├── filefromdevice.html
+│	│	│   ├── filereceive_confirm.html
+│	│	│   ├── filesend_confirm.html
+│	│	│   ├── firstbase.html
+│	│	│   ├── fortinet.html
+│	│	│   ├── groupselector.html
+│	│	│   ├── hosts_viewer.html
+│	│	│   ├── interface_builder.html
+│	│	│   ├── inventory.html
+│	│	│   ├── login.html
+│	│	│   ├── logout_confirm.html
+│	│	│   ├── napalm_get.html
+│	│	│   ├── navbar.html
+│	│	│   ├── netwkcalc.html
+│	│	│   ├── nslookup.html
+│	│	│   ├── passgen.html
+│	│	│   ├── ping.html
+│	│	│   ├── register.html
+│	│	│   ├── reverse_dns.html
+│	│	│   ├── schedule.html
+│	│	│   ├── secondbase.html
+│	│	│   ├── shell.html
+│	│	│   ├── show_bkps.html
+│	│	│   ├── table.html
+│	│	│   ├── thirdbase.html
+│	│	│   ├── unreachable.html
+│	│	│   ├── upload.html
+│	│	│   └── whois.html
+│	│	└── wsgi.py
+│	│	
+│       ├── inventory
+│	│	├── defaults.yaml
+│	│	├── groups.yaml
+│	│	└── hosts.yaml
+│	│
+│       └── requirements.txt
+│
+├── netadept.sh
+├── setup.sh
+└── tree.txt
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>netAdept</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>netAdept</title>
+    <link rel="stylesheet" href="../static/CSS/style.css">
+   	<header class="header">
+    </header>
+</head>
+<body>
+<nav>
+    <a href="{{ url_for('homepage') }}" class="logo">netAdept</a>
+    <span class="sesh">SERVER IP : {{session["svr_ip"]}}</span>
+    <span class="sesh">SELECTED DEVICE : {{session["singleselect"]}} </span>
+    <span class="sesh">SELECTED GROUPS : {{session["groupselectOne"]}}     {{session["groupselectTwo"]}} </span>
+    </a>
+
+    <!--form method="POST"  id="Refresh" name="Refresh-btn"> 
+    <input type="submit" value="Refresh">
+    </form-->
+
+    <div>
+        <ul>
+	        <a href="{{ url_for('login') }}">Log Out</a>
+        </ul>
+    </div>
+</nav>
+
+<main>
+{% block content %}
+{% endblock content %}  
+</main>
+<!--footer>Footer</footer-->
+</body>
+</html>
+

@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+
+netadept
+=======
+.bash_history
+.bash_logout
+.bashrc
+.cache/
+.git-credentials
+.gitconfig
+.lesshst
+.profile
+.python_history
+.sudo_as_admin_successful
+.vscode-server/
+.wget-hsts
+>>>>>>> 0566f06 (New initial commit with super folder)

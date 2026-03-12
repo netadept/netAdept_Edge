@@ -1,0 +1,73 @@
+{% extends "secondbase.html" %}
+{% block content %}
+<meta http-equiv="refresh" content="20"> <!-- refreshes the page every 12 seconds -->>
+<body>
+    <br>
+  <div style="color:burlywood">
+    <br><br>
+
+    <div style="text-align: center">
+    <svg height="150" width="400" fill="none">
+        <image height="150" width="400" href="../../static/m1.svg"/>
+    </svg>
+  </div>
+    <div class="container">
+        <h2 style="color:burlywood">Devices in UP State: <span class="upcount"> {{upcount}} </span></h2>
+        <table class="table">
+            <tr class="headings">
+                {% for head in headings %}
+                <th>{{head | safe}}</th>
+                {% endfor %}
+            </tr>
+            {% for rows in data_up %}
+                <tr>
+                    <td>
+                        <svg height="20" width="40" fill="none"><image height="20" width="40" href="../../static/up.svg"/></svg>
+                    </td>
+                    {% for cell in rows %}
+                    <td>
+                        {{cell | safe}}
+                    </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table><br>
+    </div>
+
+    <div class="container">
+        <h2 style="color:burlywood">Devices in DOWN State: <span class="downcount"> {{downcount}} </span></h2>
+        <table class="table">
+            <tr class="headings">
+                {% for head in headings %}
+                <th>{{head | safe }}</th>
+                {% endfor %}
+            </tr>
+            {% for rows in data_down %}
+                <tr>
+                    <td>
+                        <svg height="20" width="40" fill="none"><image height="20" width="40" href="../../static/down.svg"/></svg>
+                    </td>
+                    {% for cell in rows %}
+                    <td>
+                        {{cell | safe}}
+                    </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table><br>
+    </div>
+
+    <div class="container">
+    <div class="container">
+
+        <h3 style="color:burlywood">Users Connected to netAdept: </h3><br>
+        {% for ips in connected_ips %}
+        <pre> User: {{current_user}}</pre>
+        <pre> Connecting from: {{ ips }}</pre>
+
+        {% endfor %}
+    </div>
+    </div>
+</body>
+{% endblock content %}  
+

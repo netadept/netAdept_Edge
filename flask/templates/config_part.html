@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% extends "secondbase.html" %}
+{% block content %}
+<br><br>
+
+    <form method="POST"  id="confpart" name="confpart"> 
+    <div><br>
+      <span class="filters">Configuration Section :  </span>
+      <select id="confpart" name="part"> 
+        <!--option  selected disabled hidden></option-->
+            <option>access-list</option>       
+            <option>class-map</option>         
+            <option>common</option>
+            <option>ip-prefix-list</option>    
+            <option>ip-static-routes</option>  
+            <option>line</option>              
+            <option>policy-map</option>        
+            <option>route-map</option>         
+            <option>router ospf</option>            
+            <option>router eigrp</option>                       
+            <option>snmp</option>              
+          </select>
+          <a><input type="submit" class="submitbutton" value="Select" /></a> 
+        </div><br>
+    </form>
+
+<div class="container">
+    <h2 style="color:springgreen"> {{session["singleselect"]}}</h2>
+    <br><br>
+        {{results | safe}}
+</div>
+<br>
+{% endblock content %}  
