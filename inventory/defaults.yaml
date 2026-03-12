@@ -1,9 +1,0 @@
----
-
-connection_options:
-  scrapli:
-    extras:
-      auth_strict_key: false
-      ssh_config_file: True
-#      transport: telnetlib
-
