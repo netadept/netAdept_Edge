@@ -1029,38 +1029,14 @@ def download_backups(filename):
 
 #########################################################################################################
 
-'''
-@app.route('/backup/', methods = ['POST', "GET"])  
-def backup():  
-    data = []
-    headings = []
-    singleselect = session["singleselect"]
-    backup_folder = f"{home}/netadept/flask/backups/{singleselect}/"
-    app.config['backup_folder'] = backup_folder
-    #print(f"The backup folder is: ========={backup_folder}=============")
-
-    for root, dirs, files in os.walk(f'{backup_folder}'):
-        #print(f"Files: {files}")
-        for fls in files:
-            headings = ["Backup Files", "Delete", "Download"]
-            data.append([f"{fls}"])
-
-    if request.method == 'POST':  
-        file = request.files['file']
-        if file.filename != '':
-            file.save(os.path.join(app.config['backup_folder'], secure_filename(file.filename)))
-            return render_template("backup.html", headings=headings, data=data, name = file.filename, singleselect=singleselect) 
-    else:
-        return render_template("backup.html", headings=headings, data=data, singleselect=singleselect) # files=files,
-'''
 cron = CronTab(user=f"{current_user}")
 
 @app.route("/backup_cron/")
 def backup_cron():
-    job = cron.new(command="./backuptestscript.sh")
+    job = cron.new(command="./backupscript.sh")
     job.setall('30 6 * * *')
 
-    cron.remove_all(command="./backuptestscript.sh")
+    cron.remove_all(command="./backupscript.sh")
     cron.write()
 
     return redirect(url_for("backup"))
@@ -1068,7 +1044,7 @@ def backup_cron():
 @app.route('/schedule/', methods = ['POST', "GET"])
 def schedule():
     cron = CronTab(user=f"{current_user}")
-    job = cron.new(command="./backuptestscript.sh")
+    job = cron.new(command="./backupscript.sh")
     if request.method == 'POST':
         #cron.remove_all(command="./backuptestscript.sh")
         min = request.form.get("min")
