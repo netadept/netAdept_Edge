@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd netadept
+cd ~/netadept
 
 source netadept/bin/activate
 
