@@ -302,6 +302,12 @@ th {
   grid-template-rows: repeat(2, 180px);   /* Creates 3 rows, each 100px tall */
   gap: 10px; /* Adds space between grid cells */
 }
+.resources {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Creates 3 equal-width columns */
+  grid-template-rows: repeat(1, 180px);   /* Creates 3 rows, each 100px tall */
+  gap: 10px; /* Adds space between grid cells */
+}
 /* 
 .info {
   display: grid;

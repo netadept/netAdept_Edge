@@ -525,6 +525,17 @@ def tracepath():
     else:
         return render_template("tracepath.html", hostlist=hostlist) 
 
+@app.route("/mon_mong_draw/", methods=["POST", "GET"])
+@login_required
+def mon_mong_draw():
+    ipandport = {request.host}      # get browser ip and port
+    ippstr = (str(ipandport))       # convert to string
+    ippsplt = ippstr.split(":")[0]  # split at :
+    iponly = ippsplt.strip("'{")    # strip '{
+
+    return render_template("mon_mong_draw.html", iponly=iponly) 
+
+
 @app.route("/nslookup/", methods=["POST", "GET"])
 @login_required
 def nslookup():
@@ -870,8 +881,13 @@ def inventory():
 @app.route("/del_select/<devicename>", methods=["POST", "GET"])
 @login_required
 def del_select(devicename):
+    ipandport = {request.host}      # get browser ip and port
+    ippstr = (str(ipandport))       # convert to string
+    ippsplt = ippstr.split(":")[0]  # split at :
+    iponly = ippsplt.strip("'{")    # strip '{
+    print(iponly)
     print(devicename)
-    return render_template("del_select.html", devicename=devicename) 
+    return render_template("del_select.html", devicename=devicename, iponly=iponly) 
 
 @app.route("/delete/<devicename>", methods=["POST", "GET"])
 @login_required

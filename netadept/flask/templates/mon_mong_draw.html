@@ -1,0 +1,54 @@
+{% extends "secondbase.html" %}
+{% block content %}
+<br><br><br>
+
+    <div style="text-align: center">
+    <svg height="150" width="400" fill="none">
+        <image height="150" width="400" href="../../static/m1.svg"/>
+    </svg><br>
+    <br><br><br>
+    <div class="container">
+        <p>
+            Select the program that you wish to connect to
+        </p>
+    </div>
+    <br><br>
+        <div class="resources">
+            <div></div>
+            <div>
+                <a href="http://{{iponly}}:80" target="_blank">
+                    <svg height="125" width="130" fill="none">
+                        <image height="125" width="130" href="../../static/logo_zabbix.svg" />
+                    </svg><br>
+                 <span>Zabbix</span><br>
+                </a>
+            </div>
+
+            <div>
+                <a href="http://{{iponly}}:8081" target="_blank">
+                    <svg height="125" width="130" fill="none">
+                        <image height="125" width="130" href="../../static/mongo.svg" />
+                    </svg><br>
+                <span>Mongo Express</span><br>
+                </a>
+
+            </div>
+
+            <div>
+                <a href="https://app.diagrams.net/" target="_blank">
+                <svg height="100" width="110" fill="none">
+                <image height="100" width="110" href="../../static/drawio.svg" />
+                </svg><br><br>
+                <span>DrawIO</span>
+            </a>
+            </div>
+            <div></div>
+
+        </div>
+
+    </div>
+    <br><br>
+    </div>
+
+
+{% endblock content %}  

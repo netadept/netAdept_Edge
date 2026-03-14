@@ -4,27 +4,207 @@
 
 
 ================================================================================
-DEVICE: CISCO_TEST_ROUTER
+DEVICE: HUAWEI_TEST_ROUTER
 ================================================================================
 
-Interface                  IP-Address      OK? Method Status                Protocol
-ATM0                       unassigned      YES NVRAM  down                  down
-Ethernet0                  unassigned      YES NVRAM  administratively down down
-FastEthernet0              unassigned      YES unset  down                  down
-FastEthernet1              unassigned      YES unset  up                    up
-FastEthernet2              unassigned      YES unset  up                    up
-FastEthernet3              unassigned      YES unset  down                  down
-Loopback0                  unassigned      YES unset  up                    up
-Loopback3                  172.29.126.3    YES NVRAM  up                    up
-Loopback9                  unassigned      YES unset  up                    up
-Loopback19                 192.168.19.19   YES NVRAM  up                    up
-Loopback88                 88.88.88.8      YES NVRAM  up                    up
-NVI0                       172.29.126.3    YES unset  up                    up
-Virtual-Access1            unassigned      YES unset  up                    up
-Virtual-Access2            unassigned      YES unset  down                  down
-Virtual-Template1          unassigned      YES NVRAM  down                  down
-Vlan1                      10.11.9.12      YES NVRAM  down                  down
-Vlan19                     172.28.19.19    YES NVRAM  down                  down
-Vlan100                    192.168.123.100 YES NVRAM  up                    up
-Vlan111                    1.11.111.1      YES NVRAM  down                  down
-Vlan444                    44.44.44.4      YES NVRAM  down                  down
+[V200R009C00SPC500]
+#
+ sysname HUAWEI_TEST_ROUTER
+ header login information "
+******************************************************************************
+******************************************************************************
+                                WELCOME TO DaviesTurner_Central-Park_R02
+                           BRITANNIC TECHNOLOGIES MANAGED ROUTER
+  (Please ensure that Change Control Procedures have been followed before making changes)
+                                Contact: noc@btlnet.co.uk
+                                      01483 242555
+******************************************************************************
+******************************************************************************"
+#
+ drop illegal-mac alarm
+#
+vlan batch 2 10 to 20 100 629 4090
+#
+authentication-profile name default_authen_profile
+authentication-profile name dot1x_authen_profile
+authentication-profile name mac_authen_profile
+authentication-profile name portal_authen_profile
+authentication-profile name dot1xmac_authen_profile
+authentication-profile name multi_authen_profile
+#
+ lldp enable
+#
+dns server 8.8.8.8
+dns server 8.8.4.4
+#
+bridge 1
+#
+radius-server template default
+#
+pki realm default
+ rsa local-key-pair default
+#
+ssl policy default_policy type server
+ pki-realm default
+ version tls1.0 tls1.1
+ ciphersuite rsa_aes_128_cbc_sha
+#
+acl name SNMP-ACCESS-LIST 2999
+ rule 5 permit source 89.150.17.192 0.0.0.31
+#
+acl name VTY-ACCESS-LIST 3999
+ rule 10 permit tcp source 89.150.17.192 0.0.0.31
+ rule 20 permit tcp source 192.168.101.0 0.0.0.255
+ rule 30 permit tcp source 172.23.7.0 0.0.0.255
+ rule 40 permit tcp source 10.11.9.0 0.0.0.255
+ rule 50 permit udp source 192.168.123.0 0.0.0.255
+#
+ike proposal default
+ encryption-algorithm aes-256
+ dh group14
+ authentication-algorithm sha2-256
+ authentication-method pre-share
+ integrity-algorithm hmac-sha2-256
+ prf hmac-sha2-256
+#
+free-rule-template name default_free_rule
+#
+portal-access-profile name portal_access_profile
+#
+aaa
+ authentication-scheme default
+ authentication-scheme radius
+  authentication-mode radius
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+  authentication-scheme default
+ domain default_admin
+  authentication-scheme default
+ undo local-user admin
+ local-user sbrown password irreversible-cipher $1a$iKj}9*1#G<$2I4}Kb%+/1``-^6Xy^S.>OBQ#_W/SSu4m|XDYO@:$
+ local-user sbrown privilege level 15
+ local-user sbrown service-type telnet terminal ssh
+ local-user tattoo password irreversible-cipher $1a$=KM1BhF3q9$$.9D8k*xV"&Sf#YUVg@=|E3F,}n@8Uc#I+$.KTn1$
+ local-user tattoo privilege level 15
+ local-user tattoo service-type terminal ssh
+ local-user britannic password irreversible-cipher %^%#U>7%$K(T(KcZTJBd&zHX1Lu"ZilMH:vR7A8D{AxG>Ep\T-*Lm4J,|0Eflg4S%^%#
+ local-user britannic privilege level 15
+ local-user britannic service-type telnet terminal ssh
+#
+firewall zone Local
+#
+interface Vlanif2
+ ip address 192.168.5.2 255.255.255.0
+#
+interface Vlanif20
+ bridge 1
+ ip address 10.20.20.2 255.255.255.240
+#
+interface Vlanif100
+ ip address 10.20.23.2 255.255.255.240
+#
+interface Vlanif4090
+ description ** BTL . FOR NOC BUILD PURPOSE **
+ ip address 172.23.7.169 255.255.255.0
+#
+interface GigabitEthernet0/0/0
+ undo portswitch
+ ip address 192.168.123.210 255.255.255.0
+#
+interface GigabitEthernet0/0/1
+ port link-type access
+ port default vlan 20
+#
+interface GigabitEthernet0/0/2
+#
+interface GigabitEthernet0/0/3
+#
+interface GigabitEthernet0/0/4
+#
+interface GigabitEthernet0/0/5
+#
+interface GigabitEthernet0/0/6
+ port link-type trunk
+ port trunk allow-pass vlan 2
+#
+interface GigabitEthernet0/0/7
+#
+interface GigabitEthernet0/0/8
+#
+interface GigabitEthernet0/0/9
+#
+interface GigabitEthernet0/0/10
+ description VirtualPort
+#
+interface Cellular0/0/0
+#
+interface Cellular0/0/1
+#
+interface NULL0
+#
+interface LoopBack1
+ description ** USED FOR MONITORING & MANAGEMENT **
+ ip address 172.23.10.2 255.255.255.255
+#
+ospf 1
+ area 0.0.0.15
+  network 192.168.101.13 0.0.0.0
+#
+ snmp-agent local-engineid 800007DB03346AC2E20AD1
+ snmp-agent community read %^%#=qe*G4qV/%@]+f%P`.6II3rm(|,}uV(ga:OjlwFV]RnG%X#{->3v[&$H!YfTf5.>11>yKX)sie,s60eS%^%# acl 2999
+ snmp-agent sys-info version v2c
+ snmp-agent
+#
+ ssh server compatible-ssh1x enable
+ stelnet server enable
+ telnet server enable
+#
+ http secure-server ssl-policy default_policy
+ http server enable
+ http secure-server enable
+#
+fib regularly-refresh disable
+#
+user-interface con 0
+ authentication-mode aaa
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 15
+ idle-timeout 60 0
+#
+wlan ac
+ traffic-profile name default
+ security-profile name default
+ security-profile name default-wds
+  security wpa2 psk pass-phrase %^%#>h&hYFDA&$='NU>otd-M/JHlUYAtuQ5QEEIlNJHH%^%# aes
+ ssid-profile name default
+ vap-profile name default
+ wds-profile name default
+ regulatory-domain-profile name default
+ air-scan-profile name default
+ rrm-profile name default
+ radio-2g-profile name default
+ radio-5g-profile name default
+ wids-spoof-profile name default
+ wids-profile name default
+ ap-system-profile name default
+ port-link-profile name default
+ wired-port-profile name default
+ ap-group name default
+#
+dot1x-access-profile name dot1x_access_profile
+#
+mac-access-profile name mac_access_profile
+#
+voice
+ #
+ diagnose
+#
+ops
+#
+autostart
+#
+secelog
+#
+return

@@ -210,39 +210,8 @@
         </details>
         <br>
         {% endif %}
-        <div>
-        <details>
-        <summary class="side_heading">Monitor and DB</summary>
-        <ul class="sidelist">
-            <li class="active">
-                <svg height="20" width="40" fill="none">
-                <image height="20" width="40" href="../../static/zabbix.svg" />
-                </svg>
-                <a href="http://192.168.19.129:80" target="_blank">Zabbix</a>
-            </li>
-            <li class="active">
-                <svg height="20" width="40" fill="none"><image height="20" width="40" href="../../static/mongo.svg"/></svg>
-                <a href="http://192.168.19.129:8081" target="_blank">Mongo Express</a>
-            </li>
-        </ul>
-        </details>
-        <br>
-        </div>
 
         <div>
-        <details>
-        <summary class="side_heading">Diagrams</summary>
-        <ul class="sidelist">
-            <li class="active">
-                <svg height="18" width="35" fill="none"><image height="18" width="35" href="../../static/drawio.svg"/></svg>
-                <a href="https://app.diagrams.net/" target="_blank">DrawIO</a>
-            </li>   
-            <br>
-        </details>
-        </div>
-
-        <div>
-        <br>
         <details>
         <summary class="side_heading">File Manager</summary>
         <ul class="sidelist">
@@ -261,7 +230,26 @@
         <br>
         <details>
         <summary class="side_heading">Misc Tools</summary>
-        <ul class="sidelist">         
+        <ul class="sidelist"> 
+            <li class="active">
+                <a href="{{ url_for('mon_mong_draw') }}">Zabbix</a>
+            </li>
+
+            <li class="active">
+                <svg height="20" width="40" fill="none">
+                <image height="20" width="40" href="../../static/zabbix.svg" />
+                </svg>
+                <a href="{{ url_for('mon_mong_draw') }}">Zabbix</a>
+            </li>
+            <li class="active">
+                <svg height="20" width="40" fill="none"><image height="20" width="40" href="../../static/mongo.svg"/></svg>
+                <a href="{{ url_for('mon_mong_draw') }}">Mongo Express</a>
+            </li>
+            <li class="active">
+                <svg height="18" width="35" fill="none"><image height="18" width="35" href="../../static/drawio.svg"/></svg>
+                <a href="{{ url_for('mon_mong_draw') }}">DrawIO</a>
+            </li>   
+
             <li class="active">
                 <a href="{{ url_for('nslookup') }}">nslookup</a>
             </li>
@@ -323,8 +311,13 @@
         </ul>
         </details>
         </div>
+        <br>
 
-
+        <div>
+            <a href="{{ url_for('mon_mong_draw') }}">
+                <p class="side_heading">Resources</p>
+            </a>  
+        </div>
 
     <br><br><br>   
 </aside>
