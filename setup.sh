@@ -20,6 +20,8 @@ cd zabbix-docker
 
 docker compose up -d
 
+cd ~
+
 
 
 

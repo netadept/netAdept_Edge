@@ -7,15 +7,24 @@
 DEVICE: CISCO_TEST_ROUTER
 ================================================================================
 
-  !Contextual Config Diffs:
-!No changes were found
-
-
-
-
-================================================================================
-DEVICE: CISCO_TEST_ROUTER
-================================================================================
-
-  !Contextual Config Diffs:
-!No changes were found
+Interface                  IP-Address      OK? Method Status                Protocol
+ATM0                       unassigned      YES NVRAM  down                  down
+Ethernet0                  unassigned      YES NVRAM  administratively down down
+FastEthernet0              unassigned      YES unset  down                  down
+FastEthernet1              unassigned      YES unset  up                    up
+FastEthernet2              unassigned      YES unset  up                    up
+FastEthernet3              unassigned      YES unset  down                  down
+Loopback0                  unassigned      YES unset  up                    up
+Loopback3                  172.29.126.3    YES NVRAM  up                    up
+Loopback9                  unassigned      YES unset  up                    up
+Loopback19                 192.168.19.19   YES NVRAM  up                    up
+Loopback88                 88.88.88.8      YES NVRAM  up                    up
+NVI0                       172.29.126.3    YES unset  up                    up
+Virtual-Access1            unassigned      YES unset  up                    up
+Virtual-Access2            unassigned      YES unset  down                  down
+Virtual-Template1          unassigned      YES NVRAM  down                  down
+Vlan1                      10.11.9.12      YES NVRAM  down                  down
+Vlan19                     172.28.19.19    YES NVRAM  down                  down
+Vlan100                    192.168.123.100 YES NVRAM  up                    up
+Vlan111                    1.11.111.1      YES NVRAM  down                  down
+Vlan444                    44.44.44.4      YES NVRAM  down                  down
