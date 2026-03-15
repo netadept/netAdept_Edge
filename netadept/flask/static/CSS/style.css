@@ -266,7 +266,8 @@ th {
 
 .labels {
     display: inline-block;
-    width: 100px; /* Set consistent width */
+    width: 150px; /* Set consistent width */
+    font-size: 20px;
 }
 
 .select_box {
@@ -286,7 +287,7 @@ th {
     border: 5px solid burlywood;
     border-radius: 1em;
     margin: 0 auto; /* Centres box */
-    width: 23%;
+    width: 30%;
 }
 
 .side_heading {

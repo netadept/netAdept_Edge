@@ -233,25 +233,6 @@
         <summary class="side_heading">Misc Tools</summary>
         <ul class="sidelist"> 
             <li class="active">
-                <a href="{{ url_for('mon_mong_draw') }}">Zabbix</a>
-            </li>
-
-            <li class="active">
-                <svg height="20" width="40" fill="none">
-                <image height="20" width="40" href="../../static/zabbix.svg" />
-                </svg>
-                <a href="{{ url_for('mon_mong_draw') }}">Zabbix</a>
-            </li>
-            <li class="active">
-                <svg height="20" width="40" fill="none"><image height="20" width="40" href="../../static/mongo.svg"/></svg>
-                <a href="{{ url_for('mon_mong_draw') }}">Mongo Express</a>
-            </li>
-            <li class="active">
-                <svg height="18" width="35" fill="none"><image height="18" width="35" href="../../static/drawio.svg"/></svg>
-                <a href="{{ url_for('mon_mong_draw') }}">DrawIO</a>
-            </li>   
-
-            <li class="active">
                 <a href="{{ url_for('nslookup') }}">nslookup</a>
             </li>
             <li class="active">
@@ -264,7 +245,7 @@
                 <a href="{{ url_for('passgen') }}">Password Generator</a>
             </li>    
             <li class="active">
-                <a href="{{ url_for('netwkcalc') }}">Network Calculator</a>
+                <a href="{{ url_for('netwkcalc') }}">Subnet Calculator</a>
             </li>    
         </ul>
         </details>
@@ -314,9 +295,27 @@
         </div>
         <br>
 
-        <div>
+        <div class="side_heading">
             <a href="{{ url_for('mon_mong_draw') }}">
-                <p class="side_heading">Resources</p>
+                <label>Resources:</label>
+                <br>
+                <br>
+                <a href="{{ url_for('mon_mong_draw') }}">
+
+                    <li class="active">
+                        <svg height="20" width="40" fill="none">
+                        <image height="20" width="40" href="../../static/zabbix.svg" />
+                        </svg>
+                        <label>Zabbix</label><br>
+
+                        <svg height="20" width="40" fill="none"><image height="20" width="40" href="../../static/mongo.svg"/></svg>
+                        <label>Mongo Express</label><br>
+
+                        <svg height="18" width="35" fill="none"><image height="18" width="35" href="../../static/drawio.svg"/></svg>
+                        <label>DrawIO</label><br>
+                    </li>
+                    <br>
+                </a>
             </a>  
         </div>
 

@@ -66,6 +66,16 @@ def login_required(route):
         return route(*args, **kwargs)
     return route_wrapper
 
+### Already logged in ###
+
+def loggedin(route):
+    @functools.wraps(route)
+    def route_wrapper(*args, **kwargs):
+        if session.get("username"):
+            return redirect(url_for("dash"))
+        return route(*args, **kwargs)
+    return route_wrapper
+
 ### Error Page ###
 
 @app.errorhandler(404)
@@ -140,6 +150,7 @@ def testpage():
 # Dashboard
 
 @app.route("/", methods=["POST", "GET"])
+@loggedin
 def dashboard():
     if request.method == "POST":
         return redirect(url_for('dashboard'))
@@ -150,6 +161,7 @@ def dashboard():
 # Register
 
 @app.route("/register/", methods=["POST", "GET"])
+@loggedin
 def register():
     # Create a default user if no users are configured
     anyuser = app.db.users.find_one() # if no users this will == None
@@ -205,6 +217,7 @@ def register():
 
 # Login
 @app.route("/login/", methods=["POST", "GET"])
+@loggedin
 def login():
     session["singleselect"] = "NONE"
     session["groupselectOne"] = "NONE" 
@@ -245,11 +258,22 @@ def login():
     else:
         return render_template("login.html") 
 
-# Logout
+### about page ###
 @app.route("/about/")
 @login_required
 def about():      
     return render_template("about.html")   
+
+@app.route("/about_tech/")
+@login_required
+def about_tech():      
+    return render_template("about_tech.html")   
+
+@app.route("/about_contact/")
+@login_required
+def about_contact():      
+    return render_template("about_contact.html")   
+
 
 # Logout
 @app.route("/logout/", methods=["POST", "GET"])

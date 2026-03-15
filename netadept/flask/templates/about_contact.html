@@ -1,0 +1,30 @@
+{% extends "secondbase.html" %}
+{% block content %}
+<br><br><br>
+
+    <div style="text-align: center">
+    <svg height="150" width="400" fill="none">
+        <image height="150" width="400" href="../../static/m1.svg"/>
+    </svg><br>
+
+    <div class="container">
+
+    <h1 style="color:burlywood">Welcome to the netAdept Automation platform</h1><br><br>
+
+    <h3>
+        netAdept aims to be the singlepoint where from to monitor and manage all network devices
+    </h3>
+    </div>
+    <br><br>
+    <a href="{{ url_for('about') }}" class="button">About netAdept</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{{ url_for('about_tech') }}" class="button">Technologies used</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{{ url_for('about_contact') }}" class="button" style="background-color: rgb(170, 20, 20);">Contact Information</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br><br><br><br>
+
+    <div class="logreg" style="text-align: left;">
+        <h2 style="color:burlywood">Contact Info: </h2><br>
+        <h2> Email: sean.brown@netadept.co.uk </h2> <br>
+        <a href="mailto:sean.brown@netadept.co.uk?subject=netAdept%20Inquiry&body=Message:" class="button">Send Email</a>   
+    </div>
+
+{% endblock content %}  

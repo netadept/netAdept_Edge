@@ -12,9 +12,11 @@
     <div style="text-align: center">
         <nav>
             <span class="head">
-                <svg height="50" width="200" fill="none" >
-                    <image height="50" width="200" href="../../static/m1.svg"/>
-                </svg>
+                <a href="{{ url_for('dashboard') }}">
+                    <svg height="50" width="200" fill="none" >
+                        <image height="50" width="200" href="../../static/m1.svg"/>
+                    </svg>
+                </a>
             </span>
         </nav>
 
@@ -22,9 +24,13 @@
           <div style="color:burlywood">
             <br><br>
             <div>
+            <span class="head">
+                <a href="{{ url_for('dashboard') }}">
             <svg height="150" width="400" fill="none">
                 <image height="150" width="400" href="../../static/m1.svg"/>
             </svg>
+                </a>
+            </span>
             </div>
             <br><br>
 
@@ -41,13 +47,13 @@
             <div class="logreg" >
                 <form method="POST">
                 
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" placeholder="Enter username" required><br>
+                    <label for="username" class="labels">Username:</label>
+                    <input type="text" name="username" placeholder="Enter username" class="select_box" required><br><br>
                 
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" placeholder="Enter password" required><br>
+                    <label for="password" class="labels">Password:</label>
+                    <input type="password" name="password" placeholder="Enter password" class="select_box" required><br><br>
                 
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Submit" class="button">
                 </form>
             </div>
             </span>
