@@ -1062,7 +1062,6 @@ def schedule():
     cron = CronTab(user=f"{current_user}")
     job = cron.new(command="./backupscript.sh")
     if request.method == 'POST':
-        #cron.remove_all(command="./backuptestscript.sh")
         min = request.form.get("min")
         hrs = request.form.get("hrs")
         day = request.form.get("day")
@@ -1083,7 +1082,7 @@ def schedule():
 @app.route('/clear/', methods = ['POST', "GET"])
 def clear():
     cron = CronTab(user=f"{current_user}")
-    cron.remove_all(command="./backuptestscript.sh")
+    cron.remove_all(command="./backupscript.sh")
     cron.write()
     return redirect(url_for("schedule"))
 
