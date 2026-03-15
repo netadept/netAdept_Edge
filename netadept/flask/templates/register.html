@@ -29,9 +29,16 @@
             </div>
             <br><br>
 
-          
+            <div style="text-align: center;">
+
+                <a href="{{ url_for('login') }}" class="select_box">Login</a>
+                <a href="{{ url_for('register') }}" class="select_box">Register</a>
+                </a>
+            </div>
+            <br><br>
+                      
                 <br>
-                <div class="container">
+                <div class="logreg">
                     <form method="POST">
                         <label for="email">Please enter your email:</label>
                         <input type="email" name="email" placeholder="Enter email" required><br>

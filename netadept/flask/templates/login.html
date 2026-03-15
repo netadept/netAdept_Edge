@@ -27,29 +27,24 @@
             </svg>
             </div>
             <br><br>
-            <!--h2 class="head"> Welcome to the netAdept Automation Platform </h2> 
-            <br>
-            <h3 class="head" style="color:rgb(252, 250, 249)"> 
-                The netAdept automation platform standardises and simplifies interacting with supported vendor nework equipment. 
-                netAdept incorporates powerful open source technologies to monitor and interact with network equipment, provideing a 
-                singlepoint from where the network can be planned from. </h3> 
+
+
+            <div style="text-align: center;">
+
+                <a href="{{ url_for('login') }}" class="select_box">Login</a>
+                <a href="{{ url_for('register') }}" class="select_box">Register</a>
+                </a>
             </div>
-            <br>
-            <div>
-            {% for msg in get_flashed_messages() %}
-            {% if msg %}
-            <div class="container">{{msg}}</div>
-            {% endif %}
-            {% endfor %}
-            </div-->
+            <br><br>
+
             <span>
-            <div class="container" >
+            <div class="logreg" >
                 <form method="POST">
                 
-                    <label for="username">Please enter your username:</label>
+                    <label for="username">Username:</label>
                     <input type="text" name="username" placeholder="Enter username" required><br>
                 
-                    <label for="password">Please enter your password:</label>
+                    <label for="password">Password:</label>
                     <input type="password" name="password" placeholder="Enter password" required><br>
                 
                     <input type="submit" value="Submit">

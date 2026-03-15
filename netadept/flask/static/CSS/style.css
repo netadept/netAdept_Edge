@@ -149,7 +149,6 @@ main { /* main body */
     padding: min(3em, 15%);
     h2, p { margin-top: 1em }
 }
-
 .container-parent { 
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
@@ -283,6 +282,13 @@ th {
     font-size: 15px;
     font-weight: 700;
 }
+.logreg{
+    border: 5px solid burlywood;
+    border-radius: 1em;
+    margin: 0 auto; /* Centres box */
+    width: 23%;
+}
+
 .side_heading {
     border: 5px solid burlywood;
     border-radius: 0.5em;
