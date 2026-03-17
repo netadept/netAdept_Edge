@@ -42,8 +42,6 @@ docker --version
 3. Clone the netAdept Repository
 
 git clone https://github.com/netadept/netAdept_Edge.git
-netadept
-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
 
 ### Move netadept files into home folder ###
 

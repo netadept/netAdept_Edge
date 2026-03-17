@@ -5,7 +5,7 @@
     <div class="container">
         <h3>Are you sure that you would like to remove authorization for {{devicename}} ?</h3>
         <br><br>
-        <a href="http://192.168.19.129:15000/remove_auth/{{devicename}}" class="button">Delete</a> 
+        <a href="http://{{iponly}}:15000/remove_auth/{{devicename}}" class="button">Delete</a> 
         <a href="{{ url_for('authed_users') }}" class="button">Cancel</a> 
     </div>
 </body>
