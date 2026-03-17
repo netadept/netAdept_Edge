@@ -5,8 +5,8 @@ NONE:
 
 ALL:
   description: All Customers
-  username: netadept
-  password: netadept
+  username: sbrown
+  password: P0ff4dd3rboer
   
 MAN:
   description: Temporary group to manually group devices
@@ -18,7 +18,6 @@ CISCO:
 
 JUNIPER:
   description: JUNIPER_DEVICES
-  password: netadept777!
 
 HUAWEI:
   description: HUAWEI_DEVICES
@@ -26,7 +25,7 @@ HUAWEI:
 FORTIGATE:
   description: FORTIGATE_DEVICES
   username: admin
-  password: netadept
+  password: P0ff4dd3rboer
 
 # SOFTWARE IMAGES #
 
@@ -102,3 +101,4 @@ CUSTOMER04:
 
 CUSTOMER05:
   description: CUSTOMER05
+

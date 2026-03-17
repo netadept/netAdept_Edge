@@ -1010,9 +1010,14 @@ def hosts_viewer():
     output_folder = '/home/netadept/netadept/inventory'
     file_path = (output_folder + "/hosts.yaml")  # Path to your text file
     content = ''
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as f:
-            content = f.read()
+    if request.method == 'POST':
+        content = request.form['text']
+        with open(file_path, 'w') as f:
+            f.write(content)
+    else:
+        if os.path.exists(file_path):
+            with open(file_path, 'w') as f:
+                content = f.read()
     return render_template('hosts_viewer.html', content=content)
 
 #########################################################################################################
