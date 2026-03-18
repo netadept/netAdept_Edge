@@ -89,17 +89,6 @@ print("#########################################################################
 print(f"The directory for Flask is: {basedir}")
 print("#####################################################################################################################################")
 
-### WTForm ###
-
-#class InfoForm(FlaskForm):
-#    email = StringField("Please enter your email: ", validators=[DataRequired()])
-#    username = StringField("Please enter your username: ", validators=[DataRequired()])
-#    pre_password = StringField("Please enter your password: ", validators=[DataRequired()])
-#    submit = SubmitField("  Register  ")
-
-
-#########################################################################################################
-
 ##### Base Template #####
 
 @app.route("/secondbase", methods=["POST", "GET"])
@@ -109,12 +98,6 @@ def secondbase():
         singleselect = request.form["singleselect"] 
         session["singleselect"] = singleselect 
         device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
-        #if request.form.get("Refresh-btn"):
-        #    acl_ext = subprocess.run(["python", "scripts/view_scripts/acl_ext.py", f"{device_ip}"])
-        #    acl = subprocess.run(["python", "scripts/view_scripts/acl.py", f"{device_ip}"])
-        #    interfaces = subprocess.run(["python", "scripts/view_scripts/interfaces.py", f"{device_ip}"])
-        #    routing = subprocess.run(["python", "scripts/view_scripts/routing.py", f"{device_ip}"])
-        #    version = subprocess.run(["python", "scripts/view_scripts/version.py", f"{device_ip}"])
         return render_template("secondbase.html", hostlist=hostlist)  
     else:
         return render_template("secondbase.html", hostlist=hostlist)    
@@ -239,12 +222,7 @@ def login():
             if app.db.users.find_one({'username': usr["username"]}) and pw_check: # checks if username and email already in db
                 print(pw_check)
                 session["username"] = username # Add session for username
-
-                # Gets netAdept local server IP address
-                #content = subprocess.run([f"curl ifconfig.me",], capture_output=True, text=True, shell=True)
                 content = subprocess.run([f"dig +short myip.opendns.com @resolver1.opendns.com",], capture_output=True, text=True, shell=True)
-                #tresults = content.stdout
-                #svr_ip = tresults.replace('\n', '<br>')
                 svr_ip = content.stdout
                 session["svr_ip"] = svr_ip
                 return redirect(url_for("dash"))
@@ -410,13 +388,6 @@ def homepage():
             print(f"Username: {username} has been created and added to database")
             app.db.users.insert_one(usr) # adding the usr dict from above to db as per sign in form
 
-        #if email not in app.db.users.find_one():
-        #    app.db.users.insert_one({"email": email, "username": username, "password": password, "date": shortdate}) # add to "users" collection
-        #    flash("New user added!")
-        #else:
-        #    flash("User already registered!")
-#        app.db.users.insert_one({"email": email, "username": username, "password": password, "date": shortdate}) # add to "users" collection
-#        print(app.db.list_collection_names()) # print colelctions
         print(app.db.users.find_one({'username': f'{username}'})) # print the first {'username': 'africasean'} match in a db
         pw_check = pbkdf2_sha256.verify(pre_password, password) # check hashing the pre_password matches the hashe pw in the db (returns True/False)
         if pw_check: 
@@ -991,7 +962,7 @@ def update_hostfile():
 @app.route("/edit_file/", methods=["POST", "GET"])
 @login_required
 def edit_file():
-    output_folder = '/home/netadept/netadept/inventory'
+    output_folder = f'{home}/netadept/inventory'
     file_path = (output_folder + "/groups.yaml")  # Path to your text file
     content = ''
     if request.method == 'POST':
@@ -1004,10 +975,10 @@ def edit_file():
                 content = f.read()
     return render_template('edit_groups_file.html', content=content)
 
-@app.route("/hosts_viewer/", methods=["GET"])
+@app.route("/hosts_viewer/", methods=["POST", "GET"])
 @login_required
 def hosts_viewer():
-    output_folder = '/home/netadept/netadept/inventory'
+    output_folder = f'{home}/netadept/inventory'
     file_path = (output_folder + "/hosts.yaml")  # Path to your text file
     content = ''
     if request.method == 'POST':
@@ -1016,7 +987,7 @@ def hosts_viewer():
             f.write(content)
     else:
         if os.path.exists(file_path):
-            with open(file_path, 'w') as f:
+            with open(file_path, 'r') as f:
                 content = f.read()
     return render_template('hosts_viewer.html', content=content)
 
