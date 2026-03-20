@@ -34,3 +34,19 @@ SRX_TEST_ROUTER:
     ver: 2
     comm: africasean
     grp: Fake_zGroup
+
+HUAWEI_TEST_ROUTER:
+  hostname: 192.168.123.210
+  platform: huawei_vrp
+  port: 22
+  groups:
+    - HUAWEI
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: africasean
+    grp: netAdept_NTWRK
