@@ -16,6 +16,8 @@ CISCO:
   
 JUNIPER:
   description: Juniper Devices
+  username: netadept
+  password: netadept777!
 
 HUAWEI:
   description: Huawei Devices

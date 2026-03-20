@@ -9,7 +9,7 @@ CISCO_TEST_ROUTER:
   port: 22
   groups:
     - CISCO
-    - ALL
+    - MAN
     - ALL
     - ALL
     - ALL
@@ -25,7 +25,7 @@ SRX_TEST_ROUTER:
   port: 22
   groups:
     - JUNIPER
-    - MAN
+    - ALL
     - ALL
     - ALL
     - ALL
@@ -33,14 +33,30 @@ SRX_TEST_ROUTER:
   data:
     ver: 2
     comm: africasean
-    grp: Fake_zGroup
+    grp: netAdept_NTWRK002
 
 HUAWEI_TEST_ROUTER:
-  hostname: 192.168.123.210
+  hostname: 192.168.123.211
   platform: huawei_vrp
   port: 22
   groups:
+    - ALL
     - HUAWEI
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: africasean
+    grp: netAdept_NTWRK002
+
+CISCO_R02:
+  hostname: 192.168.123.211
+  platform: ios
+  port: 22
+  groups:
+    - CISCO
     - ALL
     - ALL
     - ALL

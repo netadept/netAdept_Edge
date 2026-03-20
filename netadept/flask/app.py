@@ -70,11 +70,11 @@ def login_required(route):
 
 def loggedin(route):
     @functools.wraps(route)
-    def route_wrapper(*args, **kwargs):
+    def rte_wrapper(*args, **kwargs):
         if session.get("username"):
             return redirect(url_for("dash"))
         return route(*args, **kwargs)
-    return route_wrapper
+    return rte_wrapper
 
 ### Error Page ###
 
@@ -928,9 +928,11 @@ def update_hostfile():
     output_folder = f"{home}/netadept/inventory"
     with open(output_folder + "/hosts.yaml", "w") as f:
         print("hosts.yaml has been cleared")
-        print(grouplist)
-        print(hostlist)
+        #print(grouplist)
+        #print(hostlist)
         f.write("--- \n\nNONE: # Empty group for filtering \n  hostname: \n ")
+        #content = subprocess.Popen(["./restart"], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        #result = subprocess.run(["./home/africasean/netadept/flask/scripts/restart.py"], capture_output=True, text=True) 
 
         
     hosts = hostinfo.find() #  find all the entries in the hostinfo DB and assign to "hosts"
