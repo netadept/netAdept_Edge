@@ -10,3 +10,12 @@ ALL:
   
 MAN:
   description: Temporary group to manually group devices
+
+CISCO:
+  description: Cisco Devices
+  
+JUNIPER:
+  description: Juniper Devices
+
+HUAWEI:
+  description: Huawei Devices

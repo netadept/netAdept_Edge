@@ -4,86 +4,27 @@
 
 
 ================================================================================
-DEVICE: SRX_TEST_ROUTER
+DEVICE: CISCO_TEST_ROUTER
 ================================================================================
 
-set version 15.1X49-D70.3
-set system root-authentication encrypted-password "$5$c4OaiHAF$uyQQS.fXOY32xSZB1FxmFdL6lXw5K9jTT4HKzYX4vNC"
-set system name-server 8.8.8.8
-set system name-server 8.8.4.4
-set system login class admin idle-timeout 210
-set system login class admin permissions all
-set system login user mcshitty uid 2012
-set system login user mcshitty class admin
-set system login user mcshitty authentication encrypted-password "$5$dByLwvhg$R6sP7g/g.gVjjUncOw54gUqDAaNswMWVeS8r/5OR5X9"
-set system login user sbrown uid 2777
-set system login user sbrown class admin
-set system login user sbrown authentication encrypted-password "$5$5EjYDjLH$kWw72E1H9wNfhlrHWAd2ur3efB9d0G62Wll6.4ehxUA"
-set system login user sparta uid 2009
-set system login user sparta class admin
-set system login user sparta authentication encrypted-password "$5$jWPosJat$Ox2XRZ.oaF9hePJiaLvdOMSvRpLodxofyQ626I5zyjA"
-set system services ssh
-set system services telnet
-set system services xnm-clear-text
-set system services netconf ssh
-set system services dhcp-local-server group jdhcp-group interface irb.0
-set system services web-management https system-generated-certificate
-set system syslog archive size 100k
-set system syslog archive files 3
-set system syslog user * any emergency
-set system syslog file messages any notice
-set system syslog file messages authorization info
-set system syslog file interactive-commands interactive-commands any
-set system max-configurations-on-flash 5
-set system max-configuration-rollbacks 5
-set system license autoupdate url https://ae1.juniper.net/junos/key_retrieval
-set security screen ids-option untrust-screen icmp ping-death
-set security screen ids-option untrust-screen ip source-route-option
-set security screen ids-option untrust-screen ip tear-drop
-set security screen ids-option untrust-screen tcp syn-flood alarm-threshold 1024
-set security screen ids-option untrust-screen tcp syn-flood attack-threshold 200
-set security screen ids-option untrust-screen tcp syn-flood source-threshold 1024
-set security screen ids-option untrust-screen tcp syn-flood destination-threshold 2048
-set security screen ids-option untrust-screen tcp syn-flood timeout 20
-set security screen ids-option untrust-screen tcp land
-set security nat source rule-set trust-to-untrust from zone trust
-set security nat source rule-set trust-to-untrust to zone untrust
-set security nat source rule-set trust-to-untrust rule source-nat-rule match source-address 0.0.0.0/0
-set security nat source rule-set trust-to-untrust rule source-nat-rule then source-nat interface
-set security policies from-zone trust to-zone trust policy trust-to-trust match source-address any
-set security policies from-zone trust to-zone trust policy trust-to-trust match destination-address any
-set security policies from-zone trust to-zone trust policy trust-to-trust match application any
-set security policies from-zone trust to-zone trust policy trust-to-trust then permit
-set security policies from-zone trust to-zone untrust policy trust-to-untrust match source-address any
-set security policies from-zone trust to-zone untrust policy trust-to-untrust match destination-address any
-set security policies from-zone trust to-zone untrust policy trust-to-untrust match application any
-set security policies from-zone trust to-zone untrust policy trust-to-untrust then permit
-set security zones security-zone trust host-inbound-traffic system-services all
-set security zones security-zone trust host-inbound-traffic protocols all
-set security zones security-zone trust interfaces irb.0
-set security zones security-zone trust interfaces ge-0/0/1.0 host-inbound-traffic system-services all
-set security zones security-zone untrust screen untrust-screen
-set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services dhcp
-set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services tftp
-set interfaces ge-0/0/0 unit 0 family inet
-set interfaces ge-0/0/1 unit 0 family inet address 192.168.123.200/24
-set interfaces ge-0/0/2 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/3 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/4 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/5 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/6 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/7 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces irb unit 0 family inet address 192.168.11.1/24
-set snmp view all oid .1
-set snmp community Br1tann1c view all
-set snmp community Br1tann1c authorization read-only
-set snmp trap-group tnetadept targets 192.168.123.8
-set protocols l2-learning global-mode switching
-set protocols lldp interface all
-set access address-assignment pool junosDHCPPool family inet network 192.168.1.0/24
-set access address-assignment pool junosDHCPPool family inet range junosRange low 192.168.1.2
-set access address-assignment pool junosDHCPPool family inet range junosRange high 192.168.1.254
-set access address-assignment pool junosDHCPPool family inet dhcp-attributes router 192.168.1.1
-set access address-assignment pool junosDHCPPool family inet dhcp-attributes propagate-settings ge-0/0/0.0
-set vlans vlan-trust vlan-id 3
-set vlans vlan-trust l3-interface irb.0
+Interface                  IP-Address      OK? Method Status                Protocol
+ATM0                       unassigned      YES NVRAM  down                  down
+Ethernet0                  unassigned      YES NVRAM  administratively down down
+FastEthernet0              unassigned      YES unset  up                    up
+FastEthernet1              unassigned      YES unset  up                    up
+FastEthernet2              unassigned      YES unset  up                    up
+FastEthernet3              unassigned      YES unset  down                  down
+Loopback0                  unassigned      YES unset  up                    up
+Loopback3                  172.29.126.3    YES NVRAM  up                    up
+Loopback9                  unassigned      YES unset  up                    up
+Loopback19                 192.168.19.19   YES NVRAM  up                    up
+Loopback88                 88.88.88.8      YES NVRAM  up                    up
+NVI0                       172.29.126.3    YES unset  up                    up
+Virtual-Access1            unassigned      YES unset  up                    up
+Virtual-Access2            unassigned      YES unset  down                  down
+Virtual-Template1          unassigned      YES NVRAM  down                  down
+Vlan1                      10.11.9.12      YES NVRAM  down                  down
+Vlan19                     172.28.19.19    YES NVRAM  down                  down
+Vlan100                    192.168.123.100 YES NVRAM  up                    up
+Vlan111                    1.11.111.1      YES NVRAM  down                  down
+Vlan444                    44.44.44.4      YES NVRAM  down                  down

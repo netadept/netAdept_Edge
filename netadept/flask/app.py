@@ -1131,7 +1131,7 @@ def upload():
             file.save(os.path.join(app.config['upload_folder'], secure_filename(file.filename)))
             return render_template("upload.html", headings=headings, data=data, name = file.filename, singleselect=singleselect) 
     else:
-        return render_template("upload.html", files=files, headings=headings, data=data, singleselect=singleselect)
+        return render_template("upload.html", headings=headings, data=data, singleselect=singleselect)
 
 @app.route("/delete_files_select/<filename>", methods=["POST", "GET"])
 @login_required
