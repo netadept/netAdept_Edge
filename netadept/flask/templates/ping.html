@@ -16,10 +16,7 @@
     {% endif %}
     -->
     {% if "100% packet loss" in results %}
-    <h2 style="color:rgb(131, 9, 15)">{{session["singleselect"]}} is not reachable !!!</h2>
-    {% endif %}
-    {% if "Unreachable" not in results %}
-    <h2 style="color:burlywood">{{session["singleselect"]}} is UP</h2>
+    <h2 style="color:rgb(131, 9, 15)">{{session["singleselect"]}} is not reachable or traffic is being blocked !!!</h2>
     {% endif %}
     <br><br>
         <pre>{{results | safe}}</pre>

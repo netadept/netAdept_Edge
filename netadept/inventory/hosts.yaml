@@ -51,8 +51,24 @@ HUAWEI_TEST_ROUTER:
     comm: africasean
     grp: netAdept_NTWRK002
 
-CISCO_R02:
-  hostname: 192.168.123.211
+SRX_TEST_ROUTER7:
+  hostname: 192.168.123.207
+  platform: junos
+  port: 22
+  groups:
+    - JUNIPER
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: africasean
+    grp: Fake_zGroup
+
+CISCO_R022:
+  hostname: 192.168.123.10
   platform: ios
   port: 22
   groups:
@@ -65,4 +81,4 @@ CISCO_R02:
   data:
     ver: 2
     comm: africasean
-    grp: netAdept_NTWRK
+    grp: Fake_zGroup

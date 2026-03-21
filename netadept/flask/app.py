@@ -335,6 +335,7 @@ def remove_auth(devicename):
 @app.route("/dash/", methods=["POST", "GET"])
 @login_required
 def dash():
+    nr = get_nornir()
     data_up = []
     data_down = []
     headings = []
@@ -498,30 +499,41 @@ def groupselector():
 @app.route("/ping/", methods=["POST", "GET"])
 @login_required
 def ping():
+    nr = get_nornir()
     if request.method == "GET":
-        svr_ip = session["svr_ip"]
-        singleselect = session["singleselect"]
-        groupselectOne = session["groupselectOne"] 
-        groupselectTwo = session["groupselectTwo"] 
-        
-        device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
-        content = subprocess.run([f"ping {device_ip} -c 4",], capture_output=True, text=True, shell=True)
-        tresults = content.stdout
-        results = tresults.replace('\n', '<br>')
-        return render_template("ping.html", hostlist=hostlist, results=results, device_ip=device_ip) 
+        try:
+            svr_ip = session["svr_ip"]
+            singleselect = session["singleselect"]
+            groupselectOne = session["groupselectOne"] 
+            groupselectTwo = session["groupselectTwo"] 
+
+            device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
+            content = subprocess.run([f"ping {device_ip} -c 4",], capture_output=True, text=True, shell=True)
+            tresults = content.stdout
+            results = tresults.replace('\n', '<br>')
+            return render_template("ping.html", hostlist=hostlist, results=results, device_ip=device_ip) 
+            
+        except:
+            return redirect(url_for("unreachable")) # change this to an error page that flashes the error
+
     else:
         return render_template("ping.html", hostlist=hostlist)    
     
 @app.route("/tracepath/", methods=["POST", "GET"])
 @login_required
 def tracepath():
+    nr = get_nornir()
     if request.method == "GET":
-        singleselect = session["singleselect"]
-        device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
-        content = subprocess.run([f"tracepath {device_ip} -m 8 -b",], capture_output=True, text=True, shell=True)
-        tresults = content.stdout
-        results = tresults.replace('\n', '<br>')
-        return render_template("tracepath.html", hostlist=hostlist, content=content, results=results, device_ip=device_ip) 
+        try:
+            singleselect = session["singleselect"]
+            device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
+            content = subprocess.run([f"tracepath {device_ip} -m 8 -b",], capture_output=True, text=True, shell=True)
+            tresults = content.stdout
+            results = tresults.replace('\n', '<br>')
+            return render_template("tracepath.html", hostlist=hostlist, content=content, results=results, device_ip=device_ip) 
+        except:
+            return redirect(url_for("unreachable")) # change this to an error page that flashes the error
+
     else:
         return render_template("tracepath.html", hostlist=hostlist) 
 
@@ -630,6 +642,7 @@ def netwkcalc():
 @app.route("/cli/", methods=["POST", "GET"])
 @login_required
 def cli():
+    nr = get_nornir()
     ipandport = {request.host}      # get browser ip and port
     ippstr = (str(ipandport))       # convert to string
     ippsplt = ippstr.split(":")[0]  # split at :
@@ -662,6 +675,7 @@ def cli():
 @app.route("/cli_tool/", methods=["POST", "GET"])
 @login_required
 def cli_tool():
+    nr = get_nornir()
     singleselect = session["singleselect"]
 
     device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
@@ -708,6 +722,7 @@ def cli_tool():
 @app.route("/fortinet/", methods=["POST", "GET"])
 @login_required
 def fortinet():
+    nr = get_nornir()
     singleselect = session["singleselect"]
     device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
     platform = nr.inventory.hosts[f"{singleselect}"].platform
@@ -728,6 +743,7 @@ def navbar():
 @app.route("/empty/") # POST Method removed as not required
 @login_required
 def empty():
+    nr = get_nornir()
     results = request.form
     singleselect = session["singleselect"]
     return render_template("empty.html", hostlist=hostlist, singleselect=singleselect)
@@ -735,6 +751,7 @@ def empty():
 @app.route("/config_runt/", methods=["POST", "GET"])
 @login_required
 def config_runt():
+    nr = get_nornir()
     if request.method == "POST":
         singleselect = session["singleselect"] # imports session from device selector
         device_ip = nr.inventory.hosts[f"{singleselect}"].hostname  # selects the ip address in the inventory host.yaml
@@ -773,6 +790,7 @@ def config_runt():
 @app.route("/show/<show_command>/", methods=["POST", "GET"])
 @login_required
 def show(show_command):
+    nr = get_nornir()
     # Redirects to the Device Selector page if all sellections == 'NONE'
     if session["singleselect"] == "NONE" and session["groupselectOne"] == "NONE" and session["groupselectTwo"] == "NONE":
         print("No sessions selected")
@@ -781,6 +799,8 @@ def show(show_command):
     singleselect = session["singleselect"]
     groupselectOne = session["groupselectOne"] 
     groupselectTwo = session["groupselectTwo"] 
+
+    hostlist = list(nr.inventory.hosts.keys())
 
     device_ip = nr.inventory.hosts[f"{singleselect}"].hostname 
     device = nr.inventory.hosts[f"{singleselect}"] 
@@ -998,6 +1018,7 @@ def hosts_viewer():
 @app.route('/backups/', methods = ['POST', "GET"])  
 @login_required
 def backups():  
+    nr = get_nornir()
     ipandport = {request.host}      # get browser ip and port
     ippstr = (str(ipandport))       # convert to string
     ippsplt = ippstr.split(":")[0]  # split at :
@@ -1029,6 +1050,7 @@ def backups():
 @app.route("/delete_backups/<filename>", methods=["POST", "GET"])
 @login_required
 def delete_backups(filename):
+    nr = get_nornir()
     singleselect = session["singleselect"]
     backup_folder = f"{home}/netadept/flask/backups/{singleselect}/"
     app.config['backup_folder'] = backup_folder
@@ -1045,6 +1067,7 @@ def delete_backups(filename):
 @app.route('/download_backups/<filename>')
 @login_required
 def download_backups(filename):
+    nr = get_nornir()
     singleselect = session["singleselect"]
     backup_folder = f"{home}/netadept/flask/backups/{singleselect}/"
     app.config['backup_folder'] = backup_folder
@@ -1116,7 +1139,8 @@ app.config['upload_folder'] = upload_folder
 
 @app.route('/upload/', methods = ['POST', "GET"])  
 @login_required
-def upload():  
+def upload():
+    nr = get_nornir()
     singleselect = session["singleselect"]
     data = []
     headings = []
@@ -1182,6 +1206,7 @@ def filesend_confirm(filename):
 @app.route('/filesend/<filename>')
 @login_required
 def filesend(filename):
+    nr = get_nornir()
     singleselect = session["singleselect"]
     groupselectOne = session["groupselectOne"] 
     groupselectTwo = session["groupselectTwo"] 
@@ -1197,6 +1222,7 @@ dirlist = []
 @app.route('/filefromdevice/')
 @login_required
 def filefromdevice():
+    nr = get_nornir()
     if session["singleselect"] == "NONE" and session["groupselectOne"] == "NONE" and session["groupselectTwo"] == "NONE":
         print("No sessions selected")
         return redirect(url_for("deviceselector"))
@@ -1222,6 +1248,7 @@ def filereceive_confirm(filename):
 @app.route('/filereceive/<filename>')
 @login_required
 def filereceive(filename):
+    nr = get_nornir()
     singleselect = session["singleselect"]
     device_ip = nr.inventory.hosts[f"{singleselect}"].hostname 
     filename = filename.strip('\n') # stripping the return value from the "filename" variable inherited from the file 
