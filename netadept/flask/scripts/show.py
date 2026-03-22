@@ -209,10 +209,13 @@ def config(task):
         elif task.host.platform == "fortinet":
             cmd = " "
 
-    if task.host.platform == "fortinet":
-        r = task.run(task=netmiko_send_command, command_string=cmd)
-    else:
-        r = task.run(task=send_commands, commands=cmd)
+    try: 
+        if task.host.platform == "fortinet":
+            r = task.run(task=netmiko_send_command, command_string=cmd)
+        else:
+            r = task.run(task=send_commands, commands=cmd)
+    except:
+        print("something")
 
     with open(f"{output_dir}" + "/output.txt", "a") as f:
         f.write("\n\n\n\n\n" + "=" * 80 + "\n" + f"DEVICE: {task.host}" + "\n" + "=" * 80 + "\n\n" )

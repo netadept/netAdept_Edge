@@ -702,8 +702,10 @@ def cli_tool():
                 f.write(cmds + "\n")
             f.close()
 
-        result = subprocess.run(["python", "scripts/cli_tool.py", f"{device_ip}"], capture_output=True, text=True) 
-
+        try:
+            result = subprocess.run(["python", "scripts/cli_tool.py", f"{device_ip}"], capture_output=True, text=True) 
+        except:
+            return redirect(url_for("unreachable")) # change this to an error page that flashes the error            
 
         try:
             with open(f"{cli_outputfile}", "r") as file:
@@ -806,11 +808,14 @@ def show(show_command):
     device = nr.inventory.hosts[f"{singleselect}"] 
     platform = nr.inventory.hosts[f"{singleselect}"].platform
 
-    if show_command == "show_int":
-        output = subprocess.run(["python", "scripts/int_show.py", f"{device_ip}", f"{groupselectOne}", f"{groupselectTwo}", f"{show_command}"], capture_output=True, text=True) 
-    else:
-        print(f"Show Script is running for: {platform}")
-        output = subprocess.run(["python", "scripts/show.py", f"{device_ip}", f"{groupselectOne}", f"{groupselectTwo}", f"{show_command}"], capture_output=True, text=True) 
+    try:
+        if show_command == "show_int":
+            output = subprocess.run(["python", "scripts/int_show.py", f"{device_ip}", f"{groupselectOne}", f"{groupselectTwo}", f"{show_command}"], capture_output=True, text=True) 
+        else:
+            print(f"Show Script is running for: {platform}")
+            output = subprocess.run(["python", "scripts/show.py", f"{device_ip}", f"{groupselectOne}", f"{groupselectTwo}", f"{show_command}"], capture_output=True, text=True) 
+    except:
+        print("Something went wrong")
 
     output_dir = f"{home}/netadept/flask/output"
     groupfile=str(output_dir) + "/" + "output.txt"
@@ -914,8 +919,14 @@ def del_select(devicename):
 @app.route("/delete/<devicename>", methods=["POST", "GET"])
 @login_required
 def delete(devicename):
-    print(devicename)
     app.db.hostgrps.delete_one({'device': f"{devicename}"})
+    nr = get_nornir() # reloads inventory 
+    singleselect = session["singleselect"] # assign current session to variable
+    print(f"{singleselect} is singleselect and {devicename} is the devicename")
+    if devicename == singleselect: # strips session when deleting selected device
+        session.pop("singleselect", None)
+        session["singleselect"] = "NONE"
+        return redirect(url_for("inventory"))
     return redirect(url_for("inventory"))
 
 

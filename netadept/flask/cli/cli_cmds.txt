@@ -1,4 +1,4 @@
-sho ip route
+sho 
 
 
 
