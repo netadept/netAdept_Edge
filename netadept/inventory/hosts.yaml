@@ -3,22 +3,6 @@
 NONE: # Empty group for filtering 
   hostname: 
  
-CISCO_TEST_ROUTER:
-  hostname: 192.168.123.100
-  platform: ios
-  port: 22
-  groups:
-    - CISCO
-    - MAN
-    - ALL
-    - ALL
-    - ALL
-    - ALL
-  data:
-    ver: 2
-    comm: africasean
-    grp: netAdept_NTWRK
-
 SRX_TEST_ROUTER:
   hostname: 192.168.123.200
   platform: junos
@@ -32,5 +16,21 @@ SRX_TEST_ROUTER:
     - ALL
   data:
     ver: 2
-    comm: africasean
-    grp: netAdept_NTWRK002
+    comm: asdfasdf
+    grp: Fake_zGroup
+
+CISCO_TEST_ROUTER:
+  hostname: 192.168.123.100
+  platform: ios
+  port: 22
+  groups:
+    - CISCO
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: afasdf
+    grp: asdfasdf
