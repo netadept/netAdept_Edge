@@ -1058,6 +1058,17 @@ def backups():
     else:
         return render_template("backup.html", headings=headings, data=data, singleselect=singleselect) # files=files,
 
+@app.route('/backup_now/', methods = ['POST', "GET"])  
+@login_required
+def backup_now():
+    try:
+        output = subprocess.run(["python", "scripts/backup.py"]) 
+    except:
+        return redirect(url_for("unreachable"))
+    finally:
+        return redirect(url_for("backups"))
+
+
 @app.route("/delete_backups/<filename>", methods=["POST", "GET"])
 @login_required
 def delete_backups(filename):
