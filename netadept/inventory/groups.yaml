@@ -21,3 +21,9 @@ JUNIPER:
 
 HUAWEI:
   description: Huawei Devices
+
+FORTINET:
+  description: Fortinet Devices
+  username: admin
+  password: netadept777!
+  

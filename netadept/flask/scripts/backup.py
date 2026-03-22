@@ -14,6 +14,8 @@ home = Path.home()
 nr = InitNornir(config_file=f"{home}/netadept/config.yaml") 
 
 def config(task): 
+    bkp_dir = f"{home}/netadept/flask/backups"
+    pathlib.Path(bkp_dir).mkdir(exist_ok=True) # Create backups folder if not already created
     group_dir = f"{home}/netadept/flask/backups/{task.host}" # Group folder variable
     pathlib.Path(group_dir).mkdir(exist_ok=True) # Create GROUPS folder if not already created
     backupfile = f"{group_dir}" + "/" + f"backup_{task.host}_{shortdate}.txt"
