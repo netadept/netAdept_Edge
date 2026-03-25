@@ -26,24 +26,48 @@
 
             <div style="padding-left: 50px">
 
-            <li>Create an inventory of network devices.</li><br>
+<pre>
 
-            <li>Create device groups allowing advanced filtering and selection of multiple devices to connect to.</li><br>
+1. Device Inventory
+	a. Add devices to access.
+	b. Assign features to each device (Credentials, SSH ports, IP addresses.
+	c. Create groups allowing filtering devices to select and features to assign to each device group.
 
-            <li>Send show commands any devices agnostic of vendor and retrieve that output. 
-            Currently Cisco IOS, Juniper junos and Huawei devices are currently supported (to be expanded as per demand).</li><br>
+2. Show Commands
+	a. Access infromation on each device agnostic of vendor.
+	b. Download output to local device.
+	c. urrently Cisco IOS, Juniper junos and Huawei devices are currently supported (to be expanded as per demand). 
 
-            <li>Automate and schedule device backups and save backup files to the netAdept server for easy access.</li><br>
+3. Backups
+	a. Automate and schedule device backups.
+	b. save backup files to the netAdept server, and delete or download as required.
+	
+4. File Manager
+	a. Upload and download files from/to PC.
+	b. Push files to devices for upgrades.
+	
+5. User Management
+	a. Basic user management by authorising and removing email addresses.
+	
+6. Basic Troubleshooting
+	a. Ping and Tracroute. 
+	b. Dashboard showing which Inventory devices are reachable.
+	
+7. Resources
+	a. Users, Authed emails and Inventory is saved in MongoDB. 
+	b. Inventory devices are automatically added to Zabbix Monitoring platform collecting SNMP data.
+	c. Build network diagrams using DrawIO.
+	
+8. Miscellaneous Tools
+	a. DNS and IP address lookups
+	b. Password Generator
+	c. Subnet Calculator
 
-            <li>Manage files. Upload and download files from/to PC, netAdept and network devices.</li><br>
-
-            <li>Manage user users that are allowed to create accounts and connect to netAdept.</li><br>
-
-            <li>miscellaneous tools like domain and ip address lookups, subnet calculator and password generator.</li><br>
-
-            <li>Zabbix monitoring suite is used to automatically add devices in the netAdept inventory to Zabbix.</li><br>
+</pre>
             
             </div>
+
+
     </div>
 
 

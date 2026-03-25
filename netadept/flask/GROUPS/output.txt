@@ -166,17 +166,3 @@ Current configuration : 62 bytes
 interface Vlan444
  ip address 44.44.44.4 255.255.255.0
 end
-
-================================================================================
-DEVICE: SRX_TEST_ROUTER
-================================================================================
-
-set interfaces ge-0/0/0 unit 0 family inet
-set interfaces ge-0/0/1 unit 0 family inet address 192.168.123.200/24
-set interfaces ge-0/0/2 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/3 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/4 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/5 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/6 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces ge-0/0/7 unit 0 family ethernet-switching vlan members vlan-trust
-set interfaces irb unit 0 family inet address 192.168.11.1/24

@@ -8,7 +8,7 @@ ALL:
   username: netadept
   password: netadept
   
-MAN:
+MANUAL:
   description: Temporary group to manually group devices
 
 CISCO:

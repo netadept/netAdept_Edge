@@ -2,4 +2,35 @@
 
 NONE: # Empty group for filtering 
   hostname: 
-  
+ 
+CISCO_TEST_ROUTER:
+  hostname: 192.168.123.100
+  platform: ios
+  port: 22
+  groups:
+    - CISCO
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: afasdf
+    grp: asdfasdf
+
+SRX_TEST_ROUTER:
+  hostname: 192.168.123.200
+  platform: junos
+  port: 22
+  groups:
+    - JUNIPER
+    - MANUAL
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: africasean
+    grp: netAdept_NTWRK
