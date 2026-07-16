@@ -1,0 +1,168 @@
+
+
+================================================================================
+DEVICE: CISCO_TEST_ROUTER
+================================================================================
+
+Building configuration...
+
+Current configuration : 240 bytes
+!
+interface ATM0
+ description 01454633247- 24Mbit/s | Uncapped
+ no ip address
+ ip flow ingress
+ ip flow egress
+ no atm ilmi-keepalive
+ pvc 0/38
+  encapsulation aal5mux ppp Virtual-Template1
+  service-policy out POLICY-QOS-OUTBOUND
+ !
+endBuilding configuration...
+
+Current configuration : 52 bytes
+!
+interface Ethernet0
+ no ip address
+ shutdown
+endBuilding configuration...
+
+Current configuration : 98 bytes
+!
+interface FastEthernet0
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+endBuilding configuration...
+
+Current configuration : 98 bytes
+!
+interface FastEthernet1
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+endBuilding configuration...
+
+Current configuration : 98 bytes
+!
+interface FastEthernet2
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+endBuilding configuration...
+
+Current configuration : 129 bytes
+!
+interface FastEthernet3
+ description 'this is fa3 ffs'
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+endBuilding configuration...
+
+Current configuration : 96 bytes
+!
+interface Loopback0
+ no ip address
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+endBuilding configuration...
+
+Current configuration : 139 bytes
+!
+interface Loopback3
+ description BTL
+ ip address 172.29.126.3 255.255.255.255
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+endBuilding configuration...
+
+Current configuration : 42 bytes
+!
+interface Loopback9
+ no ip address
+endBuilding configuration...
+
+Current configuration : 97 bytes
+!
+interface Loopback19
+ description loop_19_testint
+ ip address 192.168.19.19 255.255.255.0
+endBuilding configuration...
+
+Current configuration : 84 bytes
+!
+interface Loopback88
+ description nah
+ ip address 88.88.88.8 255.255.255.255
+endBuilding configuration...
+
+Current configuration : 84 bytes
+!
+interface Loopback88
+ description nah
+ ip address 88.88.88.8 255.255.255.255
+endBuilding configuration...
+
+Current configuration : 33 bytes
+!
+interface Virtual-Access1
+endBuilding configuration...
+
+Current configuration : 33 bytes
+!
+interface Virtual-Access2
+endBuilding configuration...
+
+Current configuration : 252 bytes
+!
+interface Virtual-Template1
+ ip address negotiated
+ ip nat outside
+ ip virtual-reassembly in
+ ip tcp adjust-mss 1460
+ keepalive 20
+ ppp chap hostname DaviesTurner_Bristol@btlnet.ws
+ ppp chap password 7 014A52144109315A11
+ ppp ipcp route default
+endBuilding configuration...
+
+Current configuration : 193 bytes
+!
+interface Vlan1
+ description LAN
+ ip address 10.11.9.12 255.255.255.0
+ ip flow ingress
+ ip flow egress
+ ip nat inside
+ ip virtual-reassembly in
+ vrrp 1 ip 10.11.9.10
+ vrrp 1 priority 99
+endBuilding configuration...
+
+Current configuration : 89 bytes
+!
+interface Vlan19
+ description vlan_attempt
+ ip address 172.28.19.19 255.255.255.0
+endBuilding configuration...
+
+Current configuration : 67 bytes
+!
+interface Vlan100
+ ip address 192.168.123.100 255.255.255.0
+endBuilding configuration...
+
+Current configuration : 62 bytes
+!
+interface Vlan111
+ ip address 1.11.111.1 255.255.255.0
+endBuilding configuration...
+
+Current configuration : 62 bytes
+!
+interface Vlan444
+ ip address 44.44.44.4 255.255.255.0
+end
