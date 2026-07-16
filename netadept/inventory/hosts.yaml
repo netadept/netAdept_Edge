@@ -2,4 +2,19 @@
 
 NONE: # Empty group for filtering 
   hostname: 
-  
+ 
+CISCO_R01:
+  hostname: 192.168.123.100
+  platform: ios
+  port: 22
+  groups:
+    - CISCO
+    - MAN
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: removethisdefault
+    grp: netAdept_NTWRK

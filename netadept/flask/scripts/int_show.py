@@ -5,7 +5,7 @@ from nornir_utils.plugins.functions import print_result
 import argparse
 import re
 from nornir.core.filter import F
-from nornir_napalm.plugins.tasks import napalm_get
+#from nornir_napalm.plugins.tasks import napalm_get
 import pathlib
 from pathlib import Path
 import datetime

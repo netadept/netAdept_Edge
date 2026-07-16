@@ -202,6 +202,20 @@ def register():
 @app.route("/login/", methods=["POST", "GET"])
 @loggedin
 def login():
+
+    # Create a default user if no users are configured
+    anyuser = app.db.users.find_one() # if no users this will == None
+    if anyuser == None:
+        password = pbkdf2_sha256.hash("removethisdefault")
+        default = {
+            "_id": uuid.uuid4().hex,
+            "email":"default@netadept.remove",
+            "username": "default",
+            "password":password,
+        }
+        app.db.users.insert_one(default)
+        app.db.authed_users.insert_one({'email': "default@netadept.remove"})
+
     session["singleselect"] = "NONE"
     session["groupselectOne"] = "NONE" 
     session["groupselectTwo"] = "NONE"
