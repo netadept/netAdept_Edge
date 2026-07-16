@@ -4,7 +4,9 @@ NONE:
   description: Blank group required to avoid certain errors
 
 ALL:
-  description: All Customers group required to avoid certain errors
+  description: All Customers
+  username: netadept
+  password: netadept
   
 MAN:
   description: Temporary group to manually group devices
@@ -14,11 +16,14 @@ CISCO:
   
 JUNIPER:
   description: Juniper Devices
+  username: netadept
+  password: netadept777!
 
 HUAWEI:
   description: Huawei Devices
 
 FORTINET:
   description: Fortinet Devices
-
+  username: admin
+  password: netadept777!
   

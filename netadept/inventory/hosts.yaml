@@ -3,3 +3,38 @@
 NONE: # Empty group for filtering 
   hostname: 
  
+CISCO_R01:
+  hostname: 192.168.123.100
+  platform: ios
+  port: 22
+  username: netadept
+  password: netadept
+  groups:
+    - CISCO
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: 222
+    grp: 222
+
+SRX_TEST_ROUTER:
+  hostname: 192.168.123.200
+  platform: junos
+  port: 22
+  username: 
+  password: 
+  groups:
+    - JUNIPER
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+    - ALL
+  data:
+    ver: 2
+    comm: 222
+    grp: 222

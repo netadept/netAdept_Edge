@@ -889,6 +889,8 @@ def inventory():
         snmpver = request.form.get("snmpver")
         snmpcom = request.form.get("snmpcom")
         snmpgrp = request.form.get("snmpgrp")
+        usrnm = request.form.get("usrnm")
+        pswrd = request.form.get("pswrd")
 
         inventory_hosts = {
             "_id": uuid.uuid4().hex,
@@ -904,6 +906,8 @@ def inventory():
             "snmpver": snmpver,
             "snmpcom": snmpcom,
             "snmpgrp": snmpgrp,
+            "usrnm": usrnm,
+            "pswrd": pswrd,
         }
         if request.form.get("device"):
             print(f"This is the device: {device}")
@@ -952,6 +956,8 @@ host_tmplt = Template(
   hostname: {{ipadd}}
   platform: {{platfrm}}
   port: {{prt}}
+  username: {{usrnm}}
+  password: {{pswrd}}
   groups:
     - {{grp1}}
     - {{grp2}}
@@ -995,8 +1001,11 @@ def update_hostfile():
         snmpver = hsts['snmpver']
         snmpcom = hsts['snmpcom']
         snmpgrp = hsts['snmpgrp']
+        usrnm = hsts['usrnm']
+        pswrd = hsts['pswrd']
 
-        template_output = host_tmplt.render(dvc=dvc, ipadd=ipadd, platfrm=platfrm, prt=prt, grp1=grp1, grp2=grp2, grp3=grp3, grp4=grp4, grp5=grp5, grp0=grp0, snmpver=snmpver, snmpcom=snmpcom, snmpgrp=snmpgrp)
+        template_output = host_tmplt.render(dvc=dvc, ipadd=ipadd, platfrm=platfrm, prt=prt, grp1=grp1, grp2=grp2, grp3=grp3, grp4=grp4, 
+        grp5=grp5, grp0=grp0, snmpver=snmpver, snmpcom=snmpcom, snmpgrp=snmpgrp, usrnm=usrnm, pswrd=pswrd)
 
         with open(output_folder + "/hosts.yaml", "a") as f:
             f.write(template_output)
