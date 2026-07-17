@@ -35,8 +35,8 @@ def send_file(task):
         time.sleep(5)
     elif task.host.platform == "junos":
         host=ip
-        user =  nr.inventory.groups['ALL'].username
-        passwd =  nr.inventory.groups['ALL'].password
+        user =  nr.inventory.hosts[f'{task.host}'].username
+        passwd =  nr.inventory.hosts[f'{task.host}'].password
         port =  nr.inventory.hosts[f"{task.host}"].port
         dev = Device(host=host, user=user, passwd=passwd, port=port)
         dev.open()

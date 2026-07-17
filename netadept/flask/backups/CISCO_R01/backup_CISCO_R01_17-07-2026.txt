@@ -1,0 +1,527 @@
+Building configuration...
+
+
+Current configuration : 9304 bytes
+!
+! Last configuration change at 13:37:09 BST Tue Jul 7 2026
+!
+version 15.7
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+no service dhcp
+!
+hostname CISCO_TEST_ROUTER02
+!
+boot-start-marker
+boot system flash c880data-universalk9-mz.157-3.M9.bin
+boot-end-marker
+!
+!
+enable secret 5 $1$/Ryf$5RKHZI/0R6iwITFg1BVm20
+!
+no aaa new-model
+process cpu threshold type total rising 80 interval 5
+process cpu statistics limit entry-percentage 40
+memory-size iomem 10
+clock summer-time BST recurring last Sun Mar 1:00 last Sun Oct 1:00
+!
+!
+!
+!
+!
+!
+!
+no ip source-route
+no ip gratuitous-arps
+!
+!
+!
+ip dhcp bootp ignore
+!
+!
+!
+no ip bootp server
+ip domain name sean@sbmail.com
+ip name-server 9.9.9.9
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+!
+flow record FLOW-RECORD
+ description record to monitor network traffic
+ match ipv4 tos
+ match ipv4 protocol
+ match ipv4 source address
+ match ipv4 destination address
+ match transport source-port
+ match transport destination-port
+ match interface input
+ match interface output
+ collect routing source as
+ collect routing destination as
+ collect routing next-hop address ipv4
+ collect transport tcp flags
+ collect counter bytes
+ collect counter packets
+ collect timestamp sys-uptime first
+ collect timestamp sys-uptime last
+!
+!
+license udi pid CISCO887VA-M-K9 sn FCZ1750932U
+!
+!
+archive
+ log config
+  logging enable
+  logging size 200
+  notify syslog contenttype plaintext
+  hidekeys
+memory reserve critical 1000
+memory reserve console 4096
+memory free low-watermark processor 20000
+memory free low-watermark IO 2000
+file privilege 5
+username sbrown privilege 15 secret 5 $1$aYiw$Um37rzZdlVCFzJ8pNczp31
+username singlepoint privilege 15 secret 5 $1$vToZ$tg7vEcW1YMyjogFB3f7lb/
+username btlnoc privilege 15 secret 5 $1$X2fL$PFOienHu/D2X35aQrYRo61
+username rockyrocket privilege 7 secret 5 $1$lP7J$nv6ZfscPhIFTVVrUzrt6F0
+username netadept privilege 15 secret 5 $1$NKMl$5U.dfP7GfeToLzj8X2gA8/
+!
+!
+!
+!
+!
+controller VDSL 0
+lldp run
+!
+!
+class-map match-any CLASS-VIDEO-OUTBOUND
+ match access-group name ACL-VIDEO-OUTBOUND
+class-map match-any CLASS-VOICE-OUTBOUND
+ match access-group name ACL-VOICE-OUTBOUND
+class-map match-any CLASS-SCANNERS-INBOUND
+ match access-group name ACL-SCANNERS-INBOUND
+class-map match-any CLASS-RDP-OUTBOUND
+ match access-group name ACL-RDP-OUTBOUND
+class-map match-any CLASS-SCANNERS-OUTBOUND
+ match access-group name ACL-SCANNERS-OUTBOUND
+class-map match-any CLASS-VIDEO-INBOUND
+ match access-group name ACL-VIDEO-INBOUND
+class-map match-any CLASS-VOICE-INBOUND
+ match access-group name ACL-VOICE-INBOUND
+class-map match-any CLASS-RDP-INBOUND
+ match access-group name ACL-RDP-INBOUND
+!
+policy-map POLICY-QOS-OUTBOUND
+ class CLASS-VOICE-OUTBOUND
+  set dscp ef
+ class CLASS-VIDEO-OUTBOUND
+  set dscp af41
+ class CLASS-RDP-OUTBOUND
+  set dscp af32
+ class CLASS-SCANNERS-OUTBOUND
+  set dscp af31
+ class class-default
+  set dscp default
+policy-map POLICY-QOS-INBOUND
+ class CLASS-VOICE-INBOUND
+  set dscp ef
+ class CLASS-VIDEO-INBOUND
+  set dscp af41
+ class CLASS-RDP-INBOUND
+  set dscp af32
+ class CLASS-SCANNERS-INBOUND
+  set dscp af31
+ class class-default
+  set dscp default
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ no ip address
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+!
+interface Loopback3
+ description BTL
+ ip address 172.29.126.3 255.255.255.255
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+!
+interface Loopback9
+ no ip address
+!
+interface Loopback19
+ description loop_19_testint
+ ip address 192.168.19.19 255.255.255.0
+!
+interface Loopback88
+ description nah
+ ip address 88.88.88.8 255.255.255.255
+!
+interface Ethernet0
+ no ip address
+ shutdown
+!
+interface ATM0
+ description 01454633247- 24Mbit/s | Uncapped
+ no ip address
+ ip flow ingress
+ ip flow egress
+ no atm ilmi-keepalive
+ pvc 0/38
+  encapsulation aal5mux ppp Virtual-Template1
+  service-policy out POLICY-QOS-OUTBOUND
+ !
+!
+interface FastEthernet0
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+!
+interface FastEthernet1
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+!
+interface FastEthernet2
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+!
+interface FastEthernet3
+ description 'this is fa3 ffs'
+ switchport access vlan 100
+ switchport mode access
+ no ip address
+!
+interface Virtual-Template1
+ ip address negotiated
+ ip nat outside
+ ip virtual-reassembly in
+ ip tcp adjust-mss 1460
+ keepalive 20
+ ppp chap hostname DaviesTurner_Bristol@btlnet.ws
+ ppp chap password 7 014A52144109315A11
+ ppp ipcp route default
+!
+interface Vlan1
+ description LAN
+ ip address 10.11.9.12 255.255.255.0
+ ip flow ingress
+ ip flow egress
+ ip nat inside
+ ip virtual-reassembly in
+ vrrp 1 ip 10.11.9.10
+ vrrp 1 priority 99
+!
+interface Vlan19
+ description vlan_attempt
+ ip address 172.28.19.19 255.255.255.0
+!
+interface Vlan100
+ ip address 192.168.123.100 255.255.255.0
+!
+interface Vlan111
+ ip address 1.11.111.1 255.255.255.0
+!
+interface Vlan444
+ ip address 44.44.44.4 255.255.255.0
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+ip nat inside source list al_NAT interface Virtual-Template1 overload
+ip route 0.0.0.0 0.0.0.0 192.168.123.2 name Unnamed_Route
+ip route 7.7.7.0 255.255.255.0 192.168.123.2 name goingtobed
+ip route 172.13.13.0 255.255.255.252 2.2.2.2 30 name None
+ip route 172.16.77.0 255.255.255.0 192.168.123.3 15 name random_route
+ip route 172.23.222.0 255.255.255.0 192.168.123.3 50 name temp_route
+ip ssh time-out 60
+ip ssh version 2
+ip ssh pubkey-chain
+  username sbrown
+   key-hash ssh-rsa 585E047B760E2C3A77D6130B784E1E2D sbrown
+ip ssh server algorithm encryption 3des-cbc aes128-cbc aes128-ctr aes192-cbc aes192-ctr aes256-cbc aes256-ctr
+ip scp server enable
+!
+ip access-list standard ANY
+ permit any
+ deny   any
+ip access-list standard NTP
+ permit 2.2.2.2
+ permit 89.150.17.213
+ permit 192.168.123.3
+ip access-list standard SNMP
+ permit 2.2.2.2
+ permit 89.150.17.215
+ permit 89.150.17.208
+ permit 192.168.123.3
+ permit 89.150.17.207
+ permit 172.23.7.0 0.0.0.255
+ permit any
+ip access-list standard aclacl7
+ permit 10.1.1.1
+ permit 10.20.20.0 0.0.0.255
+ deny   any
+!
+ip access-list extended XACL
+ permit ip host 1.1.1.1 any
+ip access-list extended XACL_TWO
+ permit ip any any
+ deny   ip host 1.1.1.1 host 6.6.6.6
+!
+logging history debugging
+logging origin-id hostname
+logging source-interface Vlan100
+logging host 89.150.17.213
+logging host 89.150.17.213 transport tcp port 514
+logging host 192.168.123.3
+logging host 192.168.123.3 transport tcp port 514
+!
+snmp-server community Br1tann1c RO SNMP
+snmp-server community davisturner RO
+snmp-server community super RO SNMP
+snmp-server community antoniosnmp RO
+snmp-server ifindex persist
+snmp-server host 192.168.123.8 Br1tann1c
+snmp-server host 10.3.3.22 DT-LHR-RTR-1
+snmp-server host 192.168.123.8 antoniosnmp
+snmp-server host 192.168.123.8 daviesturner
+snmp-server host 10.3.3.95 davisturner
+snmp-server host 192.168.123.8 public
+snmp-server host 89.150.17.20 public
+access-list 98 permit 89.150.17.192 0.0.0.31
+access-list 99 permit 10.11.9.11
+access-list 99 permit 10.5.7.2
+access-list 99 permit 10.3.3.95
+access-list 99 permit 192.168.1.10
+access-list 99 permit 192.168.1.1
+access-list 99 permit 10.3.2.182
+access-list 99 permit 89.150.17.8
+access-list 99 permit 89.150.17.192 0.0.0.31
+access-list 99 permit 89.150.17.92 0.0.0.1
+alias exec showrun show running-config view full
+privilege exec level 6 show policy-map interface
+privilege exec level 6 show policy-map
+privilege exec level 5 show running-config view full
+privilege exec level 5 show running-config view
+privilege exec all level 5 show running-config
+privilege exec level 6 show configuration
+privilege exec level 5 show logging
+privilege exec level 5 show
+banner exec ^CCC
+******************************************************************************
+******************************************************************************
+
+                             CISCO_TEST_ROUTER
+
+
+
+                ( Please ensure that Change Control Procedures
+                 have been followed before making any changes )
+
+                        Contact: singlepoint@singlepoint.com
+                                 5555 555555
+
+******************************************************************************
+******************************************************************************
+^C
+banner motd ^CCC
+******************************************************************************
+******************************************************************************
+
+            IF YOU ARE NOT AUTHORISED TO ACCESS THIS DEVICE PLEASE
+                            DISCONNECT IMMEDIATELY!
+
+
+******************************************************************************
+******************************************************************************
+^C
+configuration mode exclusive
+!
+line con 0
+ exec-timeout 30 0
+ no modem enable
+line aux 0
+ exec-timeout 0 1
+ no exec
+ transport output none
+line vty 0 4
+ exec-timeout 30 0
+ login local
+ transport input all
+!
+exception memory ignore overflow processor
+exception memory ignore overflow io
+exception crashinfo maximum files 2
+ntp source Vlan100
+ntp access-group peer NTP
+ntp server 89.150.17.213
+!
+end
+
+Interface                  IP-Address      OK? Method Status                Protocol
+ATM0                       unassigned      YES NVRAM  down                  down
+Ethernet0                  unassigned      YES NVRAM  administratively down down
+FastEthernet0              unassigned      YES unset  up                    up
+FastEthernet1              unassigned      YES unset  up                    up
+FastEthernet2              unassigned      YES unset  up                    up
+FastEthernet3              unassigned      YES unset  down                  down
+Loopback0                  unassigned      YES unset  up                    up
+Loopback3                  172.29.126.3    YES NVRAM  up                    up
+Loopback9                  unassigned      YES unset  up                    up
+Loopback19                 192.168.19.19   YES NVRAM  up                    up
+Loopback88                 88.88.88.8      YES NVRAM  up                    up
+NVI0                       172.29.126.3    YES unset  up                    up
+Virtual-Access1            unassigned      YES unset  up                    up
+Virtual-Access2            unassigned      YES unset  down                  down
+Virtual-Template1          unassigned      YES NVRAM  down                  down
+Vlan1                      10.11.9.12      YES NVRAM  down                  down
+Vlan19                     172.28.19.19    YES NVRAM  down                  down
+Vlan100                    192.168.123.100 YES NVRAM  up                    up
+Vlan111                    1.11.111.1      YES NVRAM  down                  down
+Vlan444                    44.44.44.4      YES NVRAM  down                  down
+
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is 192.168.123.2 to network 0.0.0.0
+
+S*    0.0.0.0/0 [1/0] via 192.168.123.2
+      7.0.0.0/24 is subnetted, 1 subnets
+S        7.7.7.0 [1/0] via 192.168.123.2
+      88.0.0.0/32 is subnetted, 1 subnets
+C        88.88.88.8 is directly connected, Loopback88
+      172.16.0.0/24 is subnetted, 1 subnets
+S        172.16.77.0 [15/0] via 192.168.123.3
+      172.23.0.0/24 is subnetted, 1 subnets
+S        172.23.222.0 [50/0] via 192.168.123.3
+      172.29.0.0/32 is subnetted, 1 subnets
+C        172.29.126.3 is directly connected, Loopback3
+      192.168.19.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.19.0/24 is directly connected, Loopback19
+L        192.168.19.19/32 is directly connected, Loopback19
+      192.168.123.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.123.0/24 is directly connected, Vlan100
+L        192.168.123.100/32 is directly connected, Vlan100
+
+Syslog logging: enabled (0 messages dropped, 209 messages rate-limited, 0 flushes, 1 overruns, xml disabled, filtering disabled)
+
+No Active Message Discriminator.
+
+
+
+No Inactive Message Discriminator.
+
+
+    Console logging: level debugging, 115 messages logged, xml disabled,
+                     filtering disabled
+    Monitor logging: level debugging, 0 messages logged, xml disabled,
+                     filtering disabled
+    Buffer logging:  level debugging, 324 messages logged, xml disabled,
+                    filtering disabled
+    Exception Logging: size (4096 bytes)
+    Count and timestamp logging messages: disabled
+    Persistent logging: disabled
+
+No active filter modules.
+
+    Trap logging: level informational, 352 message lines logged
+        Logging to 89.150.17.213  (udp port 514, audit disabled,
+              link up),
+              351 message lines logged,
+              0 message lines rate-limited,
+              0 message lines dropped-by-MD,
+              xml disabled, sequence number disabled
+              filtering disabled
+        Logging to 89.150.17.213  (tcp port 514, audit disabled,
+              link down),
+              0 message lines logged,
+              0 message lines rate-limited,
+              0 message lines dropped-by-MD,
+              xml disabled, sequence number disabled
+              filtering disabled
+        Logging to 192.168.123.3  (udp port 514, audit disabled,
+              link up),
+              352 message lines logged,
+              0 message lines rate-limited,
+              0 message lines dropped-by-MD,
+              xml disabled, sequence number disabled
+              filtering disabled
+        Logging to 192.168.123.3  (tcp port 514, audit disabled,
+              link down),
+              0 message lines logged,
+              0 message lines rate-limited,
+              0 message lines dropped-by-MD,
+              xml disabled, sequence number disabled
+              filtering disabled
+        Logging Source-Interface:       VRF Name:
+        Vlan100
+
+Log Buffer (4096 bytes):
+5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul  9 11:01:43.472: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul  9 11:01:44.472: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul  9 11:01:51.516: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul  9 11:01:52.524: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul  9 11:01:53.524: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 12 16:49:18.729: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 12 16:49:19.737: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 12 16:49:20.737: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 12 20:09:11.080: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 12 20:09:12.084: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 12 20:09:13.084: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 12 21:41:35.879: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 12 21:41:36.887: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 12 21:41:37.887: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 13 11:33:17.264: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 13 11:33:18.268: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 13 11:33:19.268: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 13 22:25:37.121: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 13 22:25:38.129: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 13 22:25:39.129: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 14 08:00:22.567: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 14 08:00:23.575: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 14 08:00:24.575: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 15 00:24:02.967: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 15 00:24:03.975: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 15 00:24:04.975: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 15 00:24:12.007: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 15 00:24:13.015: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 15 00:24:14.015: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 15 00:25:42.623: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 15 00:25:43.631: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 15 00:25:44.631: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 15 00:25:51.455: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 15 00:25:52.463: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 15 00:25:53.463: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 16 09:25:32.539: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 16 09:25:33.547: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 16 09:25:34.547: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up
+*Jul 16 09:25:41.375: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to down
+*Jul 16 09:25:42.383: %LINK-3-UPDOWN: Interface FastEthernet2, changed state to up
+*Jul 16 09:25:43.383: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet2, changed state to up

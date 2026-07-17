@@ -1190,6 +1190,9 @@ def upload():
     data = []
     headings = []
 
+    #print(nr.inventory.hosts[f"{singleselect}"].username)
+    #print(nr.inventory.hosts[f"{singleselect}"].password)
+
     for root, dirs, files in os.walk(f'{upload_folder}'):
         print(f"Files: {files}")
         for fls in files:
@@ -1256,7 +1259,6 @@ def filesend(filename):
     groupselectOne = session["groupselectOne"] 
     groupselectTwo = session["groupselectTwo"] 
     device_ip = nr.inventory.hosts[f"{singleselect}"].hostname 
-
     output = subprocess.run(["python", "scripts/file_transfer.py", f"{device_ip}", f"{groupselectOne}", f"{groupselectTwo}", f"{filename}"], capture_output=True, text=True)
     return redirect(url_for("upload"))
 

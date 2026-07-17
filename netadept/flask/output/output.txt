@@ -4,9 +4,8 @@
 
 
 ================================================================================
-DEVICE: SRX_TEST_ROUTER
+DEVICE: CISCO_R01
 ================================================================================
 
-/cf/var/home/netadept/:
-drawio.svg
-logo_zabbix.svg
+  !Contextual Config Diffs:
+!No changes were found

@@ -12,12 +12,15 @@ from netmiko import ConnectHandler, file_transfer
 from jnpr.junos import Device
 from jnpr.junos.utils.scp import SCP
 
+#from nornir_utils.plugins.tasks.files import sftp
+
 shortdate = datetime.datetime.today().strftime("%d-%m-%Y")
 home = Path.home()
 nr = InitNornir(config_file=f"{home}/netadept/config.yaml") 
 parser = argparse.ArgumentParser()
 
 nr = InitNornir(config_file=f"{home}/netadept/config.yaml") 
+
 
 parser.add_argument('ip_address', help='ip address of host to connect to single device')
 parser.add_argument('group_one', help='group filter one to connect to multiple devices')
@@ -35,14 +38,19 @@ dst = f"{filename}"
 
 
 def send_file(task):
+    #uname = nr.inventory.hosts[f"{task.host}"].username
     if task.host.platform == "ios":
         results = task.run(task=netmiko_file_transfer, source_file=src, dest_file=dst, direction='put', socket_timeout=10800)
         #results = task.run(task=netmiko_file_transfer, source_file=dst, dest_file=src, direction='get', socket_timeout=10800)
         time.sleep(5)
     elif task.host.platform == "junos":
+        #try:
+        #results = task.run(task=netmiko_file_transfer, source_file=src, dest_file=dst, direction='put', socket_timeout=10800)
+        #results = task.run(task=sftp, action="put", src=src, dst=f"/var/tmp/{uname}/{dst}")
+        #else:
         host=ip
-        user =  nr.inventory.groups['ALL'].username
-        passwd =  nr.inventory.groups['ALL'].password
+        user =  nr.inventory.hosts[f'{task.host}'].username
+        passwd =  nr.inventory.hosts[f'{task.host}'].password
         port =  nr.inventory.hosts[f"{task.host}"].port
 
         dev = Device(host=host, user=user, passwd=passwd, port=port)
