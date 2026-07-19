@@ -12,10 +12,10 @@
 <div class="container">
 
     {% if "reached" not in results %}
-    <h2 style="color:rgb(131, 9, 15)">{{session["singleselect"]}} is not reachable !!!</h2>
+    <h2 style="color:rgb(131, 9, 15)">{{session["singleselect"]}} is not reachable or blocked !!!</h2>
     {% endif %}
     {% if "reached" in results %}
-    <h2 style="color:burlywood">{{session["singleselect"]}} is UP</h2>
+    <h2 style="color:rgb(39, 148, 18)">{{session["singleselect"]}} is UP</h2>
     {% endif %}
     <br><br>
         <pre>{{results | safe}}</pre>

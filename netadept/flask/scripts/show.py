@@ -39,7 +39,7 @@ def config(task):
         f.close()
 
 ### commands to send to each device ###
-    if show_command == 'config':
+    if show_command == 'configuration':
         if task.host.platform == "huawei_vrp":
             cmd = ["display current"]
         elif task.host.platform == "junos":
@@ -49,7 +49,17 @@ def config(task):
         elif task.host.platform == "fortinet":
             cmd = "show"
 
-    elif show_command == 'ipint':
+    elif show_command == 'check_Config_saved':
+        if task.host.platform == "huawei_vrp":
+            cmd = ["compare configuration"]
+        elif task.host.platform == "junos":
+            cmd = ["show configuration | compare"]
+        elif task.host.platform == "ios":
+            cmd = ["sho archive config differences"]
+        elif task.host.platform == "fortinet":
+            cmd = "show | grep admin-sport -f"
+
+    elif show_command == 'ip_interfaces':
         if task.host.platform == "huawei_vrp":
             cmd = ["display ip int bri"]
         elif task.host.platform == "junos":
@@ -59,7 +69,7 @@ def config(task):
         elif task.host.platform == "fortinet":
             cmd = "get system interface physical"
         
-    elif show_command == 'int':
+    elif show_command == 'interfaces':
         if task.host.platform == "huawei_vrp":
             cmd = ["display interfaces"]
         elif task.host.platform == "junos":
@@ -68,8 +78,18 @@ def config(task):
             cmd = ["show interfaces"]
         elif task.host.platform == "fortinet":
             cmd = "get system interface physical"
-
-    elif show_command == 'route':
+            
+    elif show_command == 'vrrp':
+        if task.host.platform == "huawei_vrp":
+            cmd = ["display vrrp"]
+        elif task.host.platform == "junos":
+            cmd = ["show vrrp"]
+        elif task.host.platform == "ios":
+            cmd = ["show vrrp", "show standby"]
+        elif task.host.platform == "fortinet":
+            cmd = "get system ha status"
+            
+    elif show_command == 'routing_table':
         if task.host.platform == "huawei_vrp":
             cmd = ["display ip routing"]
         elif task.host.platform == "junos":
@@ -118,17 +138,7 @@ def config(task):
             cmd = ["show lldp neighbors detail"]
         elif task.host.platform == "fortinet":
             cmd = "get system interface physical"
-            
-    elif show_command == 'vrrp':
-        if task.host.platform == "huawei_vrp":
-            cmd = ["display vrrp"]
-        elif task.host.platform == "junos":
-            cmd = ["show vrrp"]
-        elif task.host.platform == "ios":
-            cmd = ["show vrrp", "show standby"]
-        elif task.host.platform == "fortinet":
-            cmd = "get system ha status"
-            
+
     elif show_command == 'arptable':
         if task.host.platform == "huawei_vrp":
             cmd = ["display arp"]
@@ -149,7 +159,7 @@ def config(task):
         elif task.host.platform == "fortinet":
             cmd = "get system interface physical"
             
-    elif show_command == 'dir':
+    elif show_command == 'file_system':
         if task.host.platform == "huawei_vrp":
             cmd = ["dir"]
         elif task.host.platform == "junos":
@@ -158,16 +168,6 @@ def config(task):
             cmd = ["dir"]
         elif task.host.platform == "fortinet":
             cmd = "diag hard deviceinfo disk"
-
-    elif show_command == 'compare':
-        if task.host.platform == "huawei_vrp":
-            cmd = ["compare configuration"]
-        elif task.host.platform == "junos":
-            cmd = ["show configuration | compare"]
-        elif task.host.platform == "ios":
-            cmd = ["sho archive config differences"]
-        elif task.host.platform == "fortinet":
-            cmd = "show | grep admin-sport -f"
 
     elif show_command == 'time':
         if task.host.platform == "huawei_vrp":

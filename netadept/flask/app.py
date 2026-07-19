@@ -823,7 +823,7 @@ def show(show_command):
     platform = nr.inventory.hosts[f"{singleselect}"].platform
 
     try:
-        if show_command == "show_int":
+        if show_command == "interface_configuration":
             output = subprocess.run(["python", "scripts/int_show.py", f"{device_ip}", f"{groupselectOne}", f"{groupselectTwo}", f"{show_command}"], capture_output=True, text=True) 
         else:
             print(f"Show Script is running for: {platform}")

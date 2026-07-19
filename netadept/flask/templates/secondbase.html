@@ -88,10 +88,10 @@
         <summary class="side_heading">Configuration</summary>
         <ul class="sidelist">
             <li class="active">
-                <a href="{{ url_for('show', show_command='config') }}" title="Display the selected devices active(running) configuration">Full Configuration</a>
+                <a href="{{ url_for('show', show_command='configuration') }}" title="Display the selected devices active(running) configuration">Full Configuration</a>
             </li>  
             <li class="active">
-                <a href="{{ url_for('show', show_command='compare') }}">Compare Config</a>
+                <a href="{{ url_for('show', show_command='check_Config_saved') }}">Check Config Saved</a>
             </li>              
             
         </ul>
@@ -103,16 +103,16 @@
         <ul class="sidelist">
             </li>
             <li class="active">
-                <a href="{{ url_for('show', show_command='ipint') }}">IP Interfaces</a>
+                <a href="{{ url_for('show', show_command='ip_interfaces') }}">IP Interfaces</a>
             </li>
             <li class="active">
-                <a href="{{ url_for('show', show_command='int') }}">Interfaces</a>
+                <a href="{{ url_for('show', show_command='interfaces') }}">Interfaces</a>
             </li>    
             <li class="active">
                 <a href="{{ url_for('show', show_command='vrrp') }}">VRRP</a>
             </li>  
             <li class="active">
-                <a href="{{ url_for('show', show_command='show_int') }}">Interface Config</a>
+                <a href="{{ url_for('show', show_command='interface_configuration') }}">Interface Config</a>
             </li>  
             
         </ul>
@@ -122,7 +122,7 @@
         <summary class="side_heading">Routing</summary>
         <ul class="sidelist">
             <li class="active">
-                <a href="{{ url_for('show', show_command='route') }}">Route Table</a>
+                <a href="{{ url_for('show', show_command='routing_table') }}">Route Table</a>
             </li>            
         </ul>
         </details>
@@ -144,7 +144,7 @@
                 <a href="{{ url_for('show', show_command='environment') }}">Environment</a>
             </li>  
             <li class="active">
-                <a href="{{ url_for('show', show_command='dir') }}">Dir</a>
+                <a href="{{ url_for('show', show_command='file_system') }}">File System</a>
             </li>      
             <li class="active">
                 <a href="{{ url_for('show', show_command='history') }}">History</a>

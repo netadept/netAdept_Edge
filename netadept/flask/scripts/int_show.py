@@ -28,12 +28,6 @@ group_two = (args.group_two)
 show_command = (args.show_command)
 
 def shwint(task): # function pull interface names from "show interfaces"
-
-    #group_dir = f"{home}/netadept/flask/GROUPS" # Group folder variable
-    #pathlib.Path(group_dir).mkdir(exist_ok=True) # Create GROUPS folder if not already created
-    #with open(f"{group_dir}" + "/output.txt", "w") as f: # open and clear the groups output file
-    #    f.close()
-
     output_dir = f"{home}/netadept/flask/output" # Group folder variable
     pathlib.Path(output_dir).mkdir(exist_ok=True) # Create GROUPS folder if not already created
     with open(f"{output_dir}" + "/output.txt", "w") as f: # open and clear the groups output file
@@ -52,22 +46,18 @@ def shwint(task): # function pull interface names from "show interfaces"
         print("Device not recognised")
 
     if ip != 'None':
-        customer_folder =  nr.inventory.hosts[f"{task.host}"].groups[0]
-        config_dir = f"{home}/netadept/flask/{customer_folder}"
-        device_dir = config_dir + "/" + f"{task.host}"
-        pathlib.Path(config_dir).mkdir(exist_ok=True)
-        pathlib.Path(device_dir).mkdir(exist_ok=True)  
+        int_config = output_dir + "/" + "output.txt"
 
-        with open(f"{device_dir}" + "/" + f"{show_command}", "w") as f: # open and clear the groups output file
+        with open(f"{int_config}", "w") as f: # open and clear the groups output file
             f.close()
 
         if task.host.platform != "ios" and task.host.platform != "fortinet":
             r = task.run(task=send_command, command=cmd)
-            task.run(task=write_file, content=r.result, filename=str(device_dir) + "/" + f"{show_command}", append=True)
+            task.run(task=write_file, content=r.result, filename=str(int_config), append=True)
 
         elif task.host.platform == "fortinet":
             r = task.run(task=netmiko_send_command, command_string=cmd)
-            task.run(task=write_file, content=r.result, filename=str(device_dir) + "/" + f"{show_command}", append=True)
+            task.run(task=write_file, content=r.result, filename=str(int_config), append=True)
 
         elif task.host.platform == "ios": # gets interface names and writes them to file
             r = task.run(task=send_command, command=cmd)
@@ -80,7 +70,7 @@ def shwint(task): # function pull interface names from "show interfaces"
                 except Exception as e:
                     pass
 
-                task.run(task=write_file, content=r.result, filename=str(device_dir) + "/" + f"{show_command}", append=True)
+                task.run(task=write_file, content=r.result, filename=str(int_config), append=True)
 
     elif group_one != 'NONE':
 
