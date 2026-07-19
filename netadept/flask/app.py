@@ -656,6 +656,7 @@ def netwkcalc():
 @app.route("/cli/", methods=["POST", "GET"])
 @login_required
 def cli():
+    singleselect = session["singleselect"]
     nr = get_nornir()
     ipandport = {request.host}      # get browser ip and port
     ippstr = (str(ipandport))       # convert to string
@@ -663,7 +664,9 @@ def cli():
     iponly = ippsplt.strip("'{")    # strip '{
     print(iponly)
 
-    un = nr.inventory.groups["ALL"].username
+    #un = nr.inventory.groups["ALL"].username
+    #pw = nr.inventory.groups["ALL"].password
+
 
     if request.method == "POST":
         port = request.form["port"] 
@@ -673,10 +676,15 @@ def cli():
         singleselect = session["singleselect"]
         device_ip = nr.inventory.hosts[f"{singleselect}"].hostname
         platform = nr.inventory.hosts[f"{singleselect}"].platform
-        if platform == 'fortinet':
-            content = subprocess.Popen([f"gotty --port {port} --permit-write ssh admin@{device_ip}",], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        un = nr.inventory.hosts[f"{singleselect}"].username
+        pw = nr.inventory.hosts[f"{singleselect}"].password
+
+        result = subprocess.run(['ssh-keygen', '-F', f'{device_ip}'], capture_output=True, text=True)
+        if result.returncode == 0:
+            print("known host in file")
+            content = subprocess.Popen([f"gotty --port {port} --permit-write sshpass -p {pw} ssh {un}@{device_ip}",], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         else:
-            #content = subprocess.run([f"gotty --port {port} --permit-write ssh sbrown@{device_ip}",], capture_output=True, text=True, shell=True)
+            print("host not known")
             content = subprocess.Popen([f"gotty --port {port} --permit-write ssh {un}@{device_ip}",], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         print(f"Connecting to: http://{iponly}:{port}")
