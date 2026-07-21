@@ -26,6 +26,8 @@
 #### 8. Log in
 
 
+
+
 + Tested on 24.04 LTS 
 + Minimum 2GB RAM and 50GB Hard drive
 
@@ -53,8 +55,10 @@
 ## remove sudo requirement for docker commands 
 
 	sudo usermod -aG docker $USER
-	newgrp docker
+	
+## Reload "docker" group for changes to take effect
 
+	newgrp docker
 
 + If "newgrp docker" does not work reboot or log out and back in
 
@@ -100,10 +104,11 @@
 
         http://ipaddress:15000/ 
 
- + select : register - this will activate the default user
++ select : register - this will activate the default user
 
 ## Proceed to login screen
 
-##### default login:
-##### username: default
-##### password: removethisdefault
+### default login:
+
+Username:    default
+Password:    removethisdefault
