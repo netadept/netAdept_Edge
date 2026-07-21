@@ -34,4 +34,9 @@ sudo tar xf gotty.tar.gz -C /usr/local/bin
 
 rm -rf gotty.tar.gz
 
+### Install SSHPass ###
+
+sudo apt update && sudo apt install sshpass -y
+
+
 
