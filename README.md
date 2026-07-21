@@ -22,15 +22,15 @@ netAdeptEdge
 5. install pip (if required)
 6. Setup script
 7. Run netAdept
-8. Log in 
+8. Log in
 
 
 Once you have built an Ubuntu Server. (tested on 24.04 LTS minimum 2GB RAM and 50GB Hard drive)
 
 1. Update the system and install prerequisites
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common   
+        sudo apt update && sudo apt upgrade -y
+        sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
 
 
@@ -38,70 +38,73 @@ sudo apt install -y apt-transport-https ca-certificates curl software-properties
 
 ### Add Docker’s official GPG key and repository ###
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null   
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 ### Install Docker ###
 
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin   
+        sudo apt-get update
+
+        sudo apt-get install docker-ce docker-ce-cli containerd.io
+
 
 ### remove sudo requirement for docker commands ###
 
-sudo usermod -aG docker $USER   
+        sudo usermod -aG docker $USER
 
-reboot or log out and back in # User will no longer require sudo for docker commands 
+        reboot or log out and back in # User will no longer require sudo for docker commands
 
 
 
-docker --version # Verify docker installation 
+# Verify docker installation
 
+        docker --version
 
 
 3. Clone the netAdept Repository
 
-git clone https://github.com/netadept/netAdept_Edge.git
-username: netadept
+        git clone https://github.com/netadept/netAdept_Edge.git
 
 
 ### Move netadept files into home folder ###
 
-cp -r netAdept_Edge/. .
+        cp -r netAdept_Edge/. .
 
-rm -rf netAdept_Edge
+        rm -rf netAdept_Edge
 
 
 
 4. install python venv
 
-sudo apt install python3 python3-venv
+        sudo apt install python3 python3-venv
 
 
 5. install pip
 
-sudo apt install python3-pip
+        sudo apt install python3-pip
 
 
 6. Setup script
 
-./setup.sh
+        ./setup.sh
 
 
 
 7. Run netAdept
 
-./netadept.sh
+        ./netadept.sh
 
 
 
 
-8. Log in 
+8. Log in
 
-http://ipaddress:15000/ # example: http://192.168.19.134:15000/
+        http://ipaddress:15000/ # example: http://192.168.19.134:15000/
 
-select : register - this will activate the default user
+        select : register - this will activate the default user
 
 Proceed to login screen
 
-default login:
-username: default
-password: removethisdefault
+        default login:
+        username: default
+        password: removethisdefault
