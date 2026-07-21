@@ -16,10 +16,9 @@
 /netadept/flask/backups/CISCO_R01
 /netadept/flask/backups/SRX_TEST_ROUTER
 /netadept/flask/CISCO
-/netadept/flask/files/*
-/netadept/flask/output/*
 /netadept/flask/nornir.log
 /netadept/netadept
 /netadept/.gitignore
 /netadept/nornir.log
+/netadept/flask/__pycache__/
 tree.txt
