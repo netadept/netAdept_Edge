@@ -65,7 +65,8 @@
 
 ## Verify docker installation
 
-        docker --version
+	docker --version
+
 	docker ps
 
 
@@ -108,7 +109,10 @@
 
 ## Proceed to login screen
 
-### default login:
+### default username:
 
-Username:    default
-Password:    removethisdefault
+default
+
+### default password:
+
+removethisdefault
