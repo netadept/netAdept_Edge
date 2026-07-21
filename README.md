@@ -1,16 +1,16 @@
 
 # netAdeptEdge
 
-#### 1. Centralised device access
-#### 2. Device inventory
-#### 3. Advanced group based filtering
-#### 4. Connect to device CLI in the browser
-#### 5. Retrieve information from multiple devices
-#### 6. Cisco, Juniper junos and Huawei supported (to be expanded based on demand)
-#### 7. Automate and schedule device backups
-#### 8. Transfer files from/to network devices
-#### 9. Intergrated with Zabbix monitoring suite
-#### 10. DrawIO used for network diagrams
+#### Centralised device access
+#### Device inventory
+#### Advanced group based filtering
+#### Connect to device CLI in the browser
+#### Retrieve information from multiple devices
+#### Cisco, Juniper junos and Huawei supported (to be expanded based on demand)
+#### Automate and schedule device backups
+#### Transfer files from/to network devices
+#### Intergrated with Zabbix monitoring suite
+#### DrawIO used for network diagrams
 
 
 
@@ -34,22 +34,22 @@
 
 # 1. Update the system and install prerequisites
 
-        sudo apt update && sudo apt upgrade -y
-        sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+	sudo apt update && sudo apt upgrade -y
+	sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
 
 # 2. Install Docker and dd Docker’s official GPG key and repository
 
 ## Add Docker’s official GPG key and repository 
 
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 
 ## Install Docker 
 
-        sudo apt-get update
-        sudo apt-get install docker-ce docker-ce-cli containerd.io
+	sudo apt-get update
+	sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 
 ## remove sudo requirement for docker commands 
@@ -66,44 +66,43 @@
 ## Verify docker installation
 
 	docker --version
-
 	docker ps
 
 
 ## Clone the netAdept Repository
 
-        git clone https://github.com/netadept/netAdept_Edge.git
+	git clone https://github.com/netadept/netAdept_Edge.git
 
 
 ## Move netadept files into home folder #
 
-        cp -r netAdept_Edge/. .
-        rm -rf netAdept_Edge
+	cp -r netAdept_Edge/. .
+	rm -rf netAdept_Edge
 
 
 ## 4. install python venv
 
-        sudo apt install python3 python3-venv
+	sudo apt install python3 python3-venv
 
 
 ## 5. install pip
 
-        sudo apt install python3-pip
+	sudo apt install python3-pip
 
 
 ## 6. Setup script
 
-        ./setup.sh
+	./setup.sh
 
 
 ## 7. Run netAdept
 
-        ./netadept.sh
+	./netadept.sh
 
 
 ## 8. Log in
 
-        http://ipaddress:15000/ 
+	http://ipaddress:15000/ 
 
 + select : register - this will activate the default user
 
@@ -111,8 +110,17 @@
 
 ### default username:
 
-default
+	default
 
 ### default password:
 
-removethisdefault
+	removethisdefault
+
+
+
+
+
+
+
+
+
